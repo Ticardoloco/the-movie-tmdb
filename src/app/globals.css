@@ -15,7 +15,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #fff;
     --foreground: #ededed;
   }
 }
@@ -29,3 +29,5 @@ body {
 .dark-blue{
   background-color: #0d253f;
 }
+
+
