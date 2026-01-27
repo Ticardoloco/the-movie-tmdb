@@ -34,11 +34,11 @@ const DataBox = ({id, title, poster, rating, date}) => {
           </div>
       </div>
       <div className="pb-0 w-full p-[26px_10px_12px] relative whitespace-normal flex content-start flex-wrap">
-        <div className={`absolute -top-4.75 left-2.5 w-9.5 h-9.5 flex justify-center items-center rounded-[50%] transform scale-100 transition-transform duration-200 ${Math.round(rating)>=70?"bg-green-400":"bg-yellow-400"}`}>
+        <div className={`absolute -top-4.75 left-2.5 w-9.5 h-9.5 flex justify-center items-center rounded-[50%] transform scale-100 transition-transform duration-200 ${Math.round(rating*10)>=70?"bg-green-400":"bg-yellow-400"}`}>
           <div className="mr-0 w-8.5 h-8.5 p-0.5 inline-block rounded-[50%] bg-[#081c22]">
             <div className="relative inline-block w-full h-full text-center">
               <div className="w-full h-full flex items-center justify-center">
-                <span className="pt-px pl-px text-[11px] text-white not-italic font-black normal-case leading-none after:content-['*']">{rating}</span>
+                <span className="pt-px pl-px text-[11px] text-white not-italic font-black normal-case leading-none after:content-['*']">{rating*10}</span>
               </div>
               <canvas className='h-8.5 w-8.5 bg-transparent absolute top-0 left-0'></canvas>
             </div>
