@@ -71,7 +71,7 @@ const Hero = () => {
       </div>
       <div className="w-screen bg-[rgba(0,0,0,0.7)] relative z-2 h-full flex justify-center items-center content-center  min-w-full flex-wrap box-border">
         <div className="w-full flex items-start justify-center min-w-full content-start ">
-          <div className="flex-col flex-wrap lg:max-w-350 max-w-screen w-full lg:py-7.5 lg:px-10 flex items-start content-start p-5 ">
+          <div className="flex-col flex-wrap max-w-screen w-full lg:py-7.5 lg:px-10 flex items-start content-start p-5 ">
             <div>
               <div className="bg-[linear-gradient(to_bottom_right,#b18bf5_0%,#efafbb_65%)] bg-size-[100%] bg-clip-text text-transparent">
                 <h2 className="font-bold text-6xl leading-none p-0 m-0">That&apos;s a <br /> Wrap 2025</h2>

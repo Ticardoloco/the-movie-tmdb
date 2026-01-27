@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased custom-scroll overflow-x-auto`}
       >
         <main className="flex min-h-full h-auto grow shrink basis-auto relative top-0 left-0">
         <NavBar/>

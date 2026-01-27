@@ -30,4 +30,14 @@ body {
   background-color: #0d253f;
 }
 
+.custom-scroll::-webkit-scrollbar {
+  height: 2px;
+  scrollbar-width: thin;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #cfcfcf;
+  border-radius: 9999px;
+}
+
 
