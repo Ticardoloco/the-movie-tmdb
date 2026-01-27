@@ -18,17 +18,17 @@ const Trending = ({data, setData}) => {
 
                   <div className="relative top-0 left-0 flex justify-center w-full min-w-full flex-wrap items-start content-start ">
                     <div className="min-h-0 h-auto w-full min-w-full max-w-350 overflow-x-scroll custom-scroll overflow-y-hidden transition-[height] duration-500 ease-linear flex gap-5 justify-start items-start py-5 whitespace-normal ">
-                      {data.map((item)=>slideTrend==="text2"? (
+                      {slideTrend==="text2" && data.map((item)=> (
                         
                           <DataBox key={item.id} id={item.id} poster={item.poster} title={item.title} rating={item.rating} date={item.releaseDate}/>
                         
-                      ):null)}
+                      ))}
 
-                       {data.map((item)=>slideTrend==="text3"? (
+                        {slideTrend==="text3" && data.map((item)=> (
                         
                           <DataBox key={item.id} id={item.id} poster={item.poster} title={item.title} rating={item.rating} date={item.releaseDate}/>
                         
-                      ):null)}
+                      ))}
                     </div>
                   </div>
                 </div>
