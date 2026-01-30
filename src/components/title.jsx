@@ -16,7 +16,7 @@ const Title = ({text1, text2, text3, text4, text5, text6, slide, setSlide, dropD
 const activeLabel = slideLabelMap[slide] || text2;
 
   return (
-    <div className=' flex  justify-start items-center relative z-2'>
+    <div className=' flex px-5 lg:px-10 justify-start items-center relative z-2'>
       <h2 className="mr-5 whitespace-nowrap m-0 font-semibold text-2xl p-0 leading-none text-black">{text1}</h2>
       <div className="box-border hidden lg:block">
         <div className="items-stretch border border-[rgb(17,46,70)] rounded-[30px] flex justify-start ">

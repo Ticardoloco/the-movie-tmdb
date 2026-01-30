@@ -20,7 +20,7 @@ const DataBox = ({id, title, poster, rating, date}) => {
                 />
             </Link>
           </div>
-          <div className="absolute top-2 right-2 z-4 opacity-[.6] ">
+          <div className="absolute top-2 right-2 z-1 opacity-[.6] ">
             <Link className='text-black bg-position-[0_0] font-normal' href="/">
                 <div className="text-[25.6px] relative top-0 left-0">
                     <Image
