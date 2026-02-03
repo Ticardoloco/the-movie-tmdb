@@ -5,11 +5,12 @@ import DataBox from "./dataBox";
 import api from "@/services/httpService";
 import config from "@/config";
 
-const Trending = ({ trendingData }) => {
+const Trending = () => {
   
   const [slideTrend, setSlideTrend] = useState("text2");
   const [dropDownTrend, setDropDownTrend] = useState(false);
   const [trendingDatas, setTrendingDatas] = useState([]);
+  const [trendingWeekDatas, setTrendingWeekDatas] = useState([]);
 
   const getTrendingData = async () => {
     const trendingData = await api.get(config.subUrl.trending.movie.day);
@@ -17,8 +18,19 @@ const Trending = ({ trendingData }) => {
       setTrendingDatas(trendingData.data.results);
     }
   };
+
+  const getTrendingWeekData = async () => {
+    const trendingWeekData = await api.get(config.subUrl.trending.movie.week);
+    if (trendingWeekData.status === 200) {
+      setTrendingWeekDatas(trendingWeekData.data.results);
+    }
+  };
+
+
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     getTrendingData();
+    getTrendingWeekData();
   }, []);
   return (
     <div
@@ -47,22 +59,22 @@ const Trending = ({ trendingData }) => {
                     <DataBox
                       key={item.id}
                       id={item.id}
-                      poster={item.poster}
+                      poster={item.poster_path}
                       title={item.title}
-                      rating={item.rating}
-                      date={item.releaseDate}
+                      rating={item.vote_average}
+                      date={item.release_date}
                     />
                   ))}
 
                 {slideTrend === "text3" &&
-                  trendingDatas.map((item) => (
+                  trendingWeekDatas.map((item) => (
                     <DataBox
                       key={item.id}
                       id={item.id}
-                      poster={item.poster}
+                      poster={item.poster_path}
                       title={item.title}
-                      rating={item.rating}
-                      date={item.releaseDate}
+                      rating={item.vote_average}
+                      date={item.release_date}
                     />
                   ))}
               </div>
