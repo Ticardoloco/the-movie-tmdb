@@ -19,7 +19,7 @@ const activeLabel = slideLabelMap[slide] || text2;
     <div className=' flex px-5 lg:px-10  justify-start items-center relative z-2'>
       <h2 className="mr-5 whitespace-nowrap m-0 font-semibold text-2xl p-0 leading-none text-[#efefef]">{text1}</h2>
       <div className="box-border hidden lg:block">
-        <div className="items-stretch border border-[#5f6866] rounded-[30px] flex justify-start ">
+        <div className="items-stretch border border-[#1ed5a9] rounded-[30px] flex justify-start ">
             <div onClick={()=>setSlide("text2")} className="relative top-0 left-0 z-1 ">
                 <h3 className="text-base  mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0 "><Link className={`transition-colors  py-1 px-5 rounded-[30px]  duration-500  font-semibold ${slide==="text2"?"bg-[linear-gradient(to_right,#c0fecf_0%,#1ed5a9_100%)] text-[rgb(3,37,65)] ":"text-[#efefef]"}`} href="/">{text2}</Link></h3>
                 

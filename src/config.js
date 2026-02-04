@@ -16,6 +16,28 @@ const config = {
         week: "/trending/all/week",
       },
     },
+
+    trailer: {
+      popular: "/movie/popular",
+      streaming: "/tv/top_rated",
+      on_tv: "/tv/on_the_air",
+      for_rent: "/tv/airing_today",
+      theater: "/movie/now_playing"
+    },
+
+    popular: {
+      streaming: "/movie/now_playing",
+      on_tv: "/tv/top_rated",
+      for_rent: "/movie/top_rated",
+      theater: "/movie/upcoming"
+    },
+
+    watch: {
+      movie: "/discover/movie",
+      tv: "/discover/tv"
+    }
+
+    
   },
 };
 
