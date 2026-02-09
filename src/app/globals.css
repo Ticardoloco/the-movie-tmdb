@@ -40,4 +40,17 @@ body {
   border-radius: 9999px;
 }
 
+.mask-check {
+    -webkit-mask-image: url("/public/mark.svg");
+    mask-image: url("/public/mark.svg");
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
 

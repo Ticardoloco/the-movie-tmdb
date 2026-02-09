@@ -39,6 +39,11 @@ const config = {
 
     provider: {
       watch_provider: "/watch/providers/movie"
+    },
+
+    genres: {
+      movie: "/genre/movie/list",
+      tv: "/genre/tv/list"
     }
 
     
