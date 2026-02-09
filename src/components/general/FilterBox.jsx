@@ -11,7 +11,7 @@ const FilterBox = ({ text1, genresDatas }) => {
   const [toWatchDropDown, setToWatchDropDown] = useState(false);
   const [select, setSelect] = useState(false);
   const [filterDropDown, setFilterDropDown] = useState(true);
-  const [availability, setAvailability] = useState(false);
+  const [availability, setAvailability] = useState(true);
   const [stream, setStream] = useState(true);
   const [free, setFree] = useState(true);
   const [ads, setAds] = useState(true);
@@ -801,7 +801,9 @@ const FilterBox = ({ text1, genresDatas }) => {
 
             <ul className="-mt-2 m-0 p-0 ">
                 {Array.isArray(genresDatas) && genresDatas.map((item)=>(
-                    <li key={item.id} className=""></li>
+                    <li key={item.id} className="inline-flex border border-solid border-[#9e9e9e] rounded-[14px] py-1 px-3 text-[14.4px] mr-1.5 mt-2 ">
+                        <Link href="/" className="text-black text-[12.96px] ">{item.name}</Link>
+                    </li>
                 ))}
             </ul>
         </div>
