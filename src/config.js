@@ -33,8 +33,12 @@ const config = {
     },
 
     watch: {
-      movie: "/discover/movie",
+      movie: "/trending/tv/day",
       tv: "/discover/tv"
+    },
+
+    provider: {
+      watch_provider: "/watch/providers/movie"
     }
 
     
