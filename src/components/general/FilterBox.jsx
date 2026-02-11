@@ -5,28 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-const FilterBox = ({ text1, genresDatas }) => {
+const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchDropDown, setToWatchDropDown, select, setSelect, selectAdult, setSelectAdult, selectLanguage, setSelectLanguage, filterDropDown, setFilterDropDown, availability, setAvailability, stream, setStream, free, setFree, ads, setAds, rent, setRent, buy, setBuy, searchRelease, setSearchRelease, searchCountry, setSearchCountry, theatricalLimited, setTheatricalLimited, theatrical, setTheatrical, premiere, setPremiere, digital, setDigital, physical, setPhysical, tv, setTv, selectedSort, setSelectedSort, adultContent, setAdultContent, language, setlanguage }) => {
   const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/original";
-  const [sortDropDown, setSortDropDown] = useState(false);
-  const [toWatchDropDown, setToWatchDropDown] = useState(false);
-  const [select, setSelect] = useState(false);
-  const [filterDropDown, setFilterDropDown] = useState(true);
-  const [availability, setAvailability] = useState(true);
-  const [stream, setStream] = useState(true);
-  const [free, setFree] = useState(true);
-  const [ads, setAds] = useState(true);
-  const [rent, setRent] = useState(true);
-  const [buy, setBuy] = useState(true);
-  const [searchRelease, setSearchRelease] = useState(false);
-  const [searchCountry, setSearchCountry] = useState(false);
-  const [theatricalLimited, setTheatricalLimited] = useState(true);
-  const [theatrical, setTheatrical] = useState(true);
-  const [premiere, setPremiere] = useState(true);
-  const [digital, setDigital] = useState(true);
-  const [physical, setPhysical] = useState(true);
-  const [tv, setTv] = useState(true);
-  const [selectedSort, setSelectedSort] = useState("Popularity Decending");
+  
   const [watchProviderDatas, setWatchProviderDatas] = useState([]);
+  const [languageDatas, setLanguageDatas] = useState([])
   const getWatchProviderData = async () => {
     const watchProviderData = await api.get(
       config.subUrl.provider.watch_provider,
@@ -36,10 +19,18 @@ const FilterBox = ({ text1, genresDatas }) => {
     }
   };
 
+  const getLanguageData = async ()=>{
+    const languageData = await api.get(config.subUrl.configuration.Language);
+    if (languageData.status === 200) {
+      setLanguageDatas(languageData.data)
+    }
+  };
+
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     getWatchProviderData();
-  });
+    getLanguageData()
+  },[]);
   return (
     <div>
       <div className="min-w-65 w-65 border border-[#e3e3e3] rounded-lg flex flex-wrap justify-between overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.1)] bg-white">
@@ -808,6 +799,317 @@ const FilterBox = ({ text1, genresDatas }) => {
             </ul>
         </div>
 
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+          <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Certification</h3>
+          <ul className="-mt-2 m-0 p-0"></ul>
+        </div>
+
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+            <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Adult Content</h3>
+
+            <span className="text-[14.4px] w-full text-[#212529] bg-white border-[rgba(33,37,41,0.2)] leading-normal cursor-pointer m-0 p-0 min-w-0 border font-normal text-start shadow-none items-stretch relative overflow-hidden truncate appearance-none outline-0 inline-flex flex-row flex-nowrap align-middle rounded-md ">
+            <span className="py-1.5 px-3 whitespace-nowrap flex flex-row flex-nowrap items-center w-full border-0 outline-0 text-inherit font-[inherit] grow shrink basis-[0%] relative z-1 overflow-hidden truncate appearance-none m-0 cursor-pointer ">
+              <span className="grow shrink basis-[0%] overflow-hidden truncate whitespace-nowrap text-inherit font-[inherit] text-sm cursor-pointer text-start ">
+                {adultContent}
+              </span>
+            </span>
+            <button className="py-1.5 px-1.5 text-inherit bg-[0_0] border-transparent p-1.5 w-auto border-0 [border-inline-start-width:1px] flex-none aspect-auto shadow-none m-0 text-base gap-0 leading-normal border-solid font-normal text-center whitespace-nowrap inline-flex items-center justify-center align-middle select-none  cursor-pointer outline-0 appearance-none relative transition-colors duration-200 ease-in-out overflow-visible">
+              <span
+                onClick={() => setSelectAdult(!selectAdult)}
+                className="min-h-4 inline-flex items-center justify-center min-w-auto! text-inherit self-center relative w-4 h-4 outline-0 leading-none flex-row flex-nowrap align-middle "
+              >
+                <svg
+                  viewBox="0 0 512 512"
+                  focusable="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M256 352 128 160h256z"></path>
+                </svg>
+              </span>
+            </button>
+            <select
+              value={selectedSort}
+              onChange={(e) => {
+                setAdultContent(e.target.value);
+                setSelectAdult(false);
+              }}
+              name="sort_by"
+              className={`text-[13px] w-full m-0 text-inherit leading-[inherit] ${selectAdult ? "block" : "hidden"}`}
+            >
+              <option value="Exclude adult">Exclude adult</option>
+              <option value="Incude adult">Incude adult</option>
+            </select>
+          </span>
+        </div>
+
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+          <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Language <span className="ml-1.5 opacity-[0.4] font-normal inline-flex items-center relative top-0 left-0 min-w-4 w-4 min-h-4 h-4 justify-center">
+            <Image
+            width={16}
+            height={16}
+            src="/qmark.svg"
+            alt="qmark"
+            />
+            </span></h3>
+               <span className="text-[14.4px] w-full text-[#212529] bg-white border-[rgba(33,37,41,0.2)] leading-normal cursor-pointer m-0 p-0 min-w-0 border font-normal text-start shadow-none items-stretch relative overflow-hidden truncate appearance-none outline-0 inline-flex flex-row flex-nowrap align-middle rounded-md ">
+            <span className="py-1.5 px-3 whitespace-nowrap flex flex-row flex-nowrap items-center w-full border-0 outline-0 text-inherit font-[inherit] grow shrink basis-[0%] relative z-1 overflow-hidden truncate appearance-none m-0 cursor-pointer ">
+              <span className="grow shrink basis-[0%] overflow-hidden truncate whitespace-nowrap text-inherit font-[inherit] text-sm cursor-pointer text-start ">
+                {language}
+              </span>
+            </span>
+            <button className="py-1.5 px-1.5 text-inherit bg-[0_0] border-transparent p-1.5 w-auto border-0 [border-inline-start-width:1px] flex-none aspect-auto shadow-none m-0 text-base gap-0 leading-normal border-solid font-normal text-center whitespace-nowrap inline-flex items-center justify-center align-middle select-none  cursor-pointer outline-0 appearance-none relative transition-colors duration-200 ease-in-out overflow-visible">
+              <span
+                onClick={() => setSelectLanguage(!selectLanguage)}
+                className="min-h-4 inline-flex items-center justify-center min-w-auto! text-inherit self-center relative w-4 h-4 outline-0 leading-none flex-row flex-nowrap align-middle "
+              >
+                <svg
+                  viewBox="0 0 512 512"
+                  focusable="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M256 352 128 160h256z"></path>
+                </svg>
+              </span>
+            </button>
+            <select
+              value={language}
+              onChange={(e) => {
+                setlanguage(e.target.value);
+                setSelectLanguage(false);
+              }}
+              name="sort_by"
+              className={`text-[13px] w-full m-0 text-inherit leading-[inherit] ${selectLanguage ? "block" : "hidden"}`}
+            >
+              {languageDatas.map((item)=>(
+                <option key={item.iso_639_1} value={`${item.english_name}`}>{item.english_name}</option>
+              ))}
+              
+            </select>
+          </span>
+
+        </div>
+
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+          <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">User Score</h3>
+          <div className="pb-4 w-full text-[#212529] flex-row flex-nowrap h-fit gap-2 border-0 outline-0 text-base leading-normal bg-[0_0] inline-flex items-center relative ">
+            <div className="h-6.5 grow shrink basis-auto flex relative touch-none text-[#212529]">
+              <ul className="m-0 p-0 grow shrink basis-full flex justify-between select-none border-0 outline-0 ">
+                <li className="bg-position-[0_-2px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}>
+                  <span className="start-0 text-[#b7b7b7] bottom-[-1.2em] transform -translate-x-[50%] w-auto text-[14.72px] leading-none whitespace-nowrap absolute cursor-pointer">0</span>
+                </li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+              
+                 <li className="bg-position-[0_-2px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}>
+                  <span className="start-0 text-[#b7b7b7] bottom-[-1.2em] transform -translate-x-[50%] w-auto text-[14.72px] leading-none whitespace-nowrap absolute cursor-pointer">5</span>
+                </li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+                
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[0_-2px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}>
+                  <span className="start-0 text-[#b7b7b7] bottom-[-1.2em] transform -translate-x-[50%] w-auto text-[14.72px] leading-none whitespace-nowrap absolute cursor-pointer">10</span>
+                </li>
+
+              </ul>
+
+              <div className="w-full bg-[rgba(33,37,41,0.34)] rounded-md h-2 start-0 -mt-[calc(0.8px/2)] top-1/2 -translate-y-1/2 cursor-pointer m-0 p-0 absolute text-[#212529]">
+                <div className="w-56.5 -left-px start-0 bg-[#01b3e4] rounded-md h-2 -mt-[calc(0.8px/2)]"></div>
+                <span className="-left-2 top-1/2 -translate-y-1/2 absolute border-[#01b3e4] text-white rounded-full bg-[#01b3e4] bg-no-repeat border-solid border outline-0 text-center w-4 h-4"></span>
+
+                <span className="left-55 top-1/2 -translate-y-1/2 absolute border-[#01b3e4] text-white rounded-full bg-[#01b3e4] bg-no-repeat border-solid border outline-0 text-center w-4 h-4"></span>
+              </div>
+              <div className="hidden pb-4 w-full text-[#212529] ">
+                <input type="text" className="leading-normal text-inherit font-[inherit] m-0 " />
+                <input type="text" className="leading-normal text-inherit font-[inherit] m-0 " />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+          <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Minimum User Votes</h3>
+          <div className="pb-4 w-full text-[#212529] flex-row flex-nowrap h-fit gap-2 border-0 outline-0 text-base leading-normal bg-[0_0] inline-flex items-center relative ">
+            <div className="h-6.5 grow shrink basis-auto flex relative touch-none text-[#212529]">
+              <ul className="m-0 p-0 grow shrink basis-full flex justify-between select-none border-0 outline-0 ">
+                <li className="bg-position-[0_-2px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}>
+                  <span className="start-0 text-[#b7b7b7] bottom-[-1.2em] transform -translate-x-[50%] w-auto text-[14.72px] leading-none whitespace-nowrap absolute cursor-pointer">0</span>
+                </li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[0_-2px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}>
+                  <span className="start-0 text-[#b7b7b7] bottom-[-1.2em] transform -translate-x-[50%] w-auto text-[14.72px] leading-none whitespace-nowrap absolute cursor-pointer">100</span>
+                </li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                 <li className="bg-position-[0_-2px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}>
+                  <span className="start-0 text-[#b7b7b7] bottom-[-1.2em] transform -translate-x-[50%] w-auto text-[14.72px] leading-none whitespace-nowrap absolute cursor-pointer">200</span>
+                </li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                 <li className="bg-position-[0_-2px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}>
+                  <span className="start-0 text-[#b7b7b7] bottom-[-1.2em] transform -translate-x-[50%] w-auto text-[14.72px] leading-none whitespace-nowrap absolute cursor-pointer">300</span>
+                </li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+                
+                 <li className="bg-position-[0_-2px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}>
+                  <span className="start-0 text-[#b7b7b7] bottom-[-1.2em] transform -translate-x-[50%] w-auto text-[14.72px] leading-none whitespace-nowrap absolute cursor-pointer">400</span>
+                </li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[0_-2px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}>
+                  <span className="start-0 text-[#b7b7b7] bottom-[-1.2em] transform -translate-x-[50%] w-auto text-[14.72px] leading-none whitespace-nowrap absolute cursor-pointer">500</span>
+                </li>
+
+              </ul>
+
+              <div className="w-full bg-[rgba(33,37,41,0.34)] rounded-md h-2 start-0 -mt-[calc(0.8px/2)] top-1/2 -translate-y-1/2 cursor-pointer m-0 p-0 absolute text-[#212529]">
+                <div className="w-56.5 hidden -left-px start-0 bg-[#01b3e4] rounded-md h-2 -mt-[calc(0.8px/2)]"></div>
+                <span className="-left-2 top-1/2 -translate-y-1/2 absolute border-[#01b3e4] text-white rounded-full bg-[#01b3e4] bg-no-repeat border-solid border outline-0 text-center w-4 h-4"></span>
+
+                <span className="left-55 hidden top-1/2 -translate-y-1/2 absolute border-[#01b3e4] text-white rounded-full bg-[#01b3e4] bg-no-repeat border-solid border outline-0 text-center w-4 h-4"></span>
+              </div>
+              <div className="hidden pb-4 w-full text-[#212529] ">
+                <input type="text" className="leading-normal text-inherit font-[inherit] m-0 " />
+                <input type="text" className="leading-normal text-inherit font-[inherit] m-0 " />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+          <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Runtime</h3>
+          <div className="pb-4 w-full text-[#212529] flex-row flex-nowrap h-fit gap-2 border-0 outline-0 text-base leading-normal bg-[0_0] inline-flex items-center relative ">
+            <div className="h-6.5 grow shrink basis-auto flex relative touch-none text-[#212529]">
+              <ul className="m-0 p-0 grow shrink basis-full flex justify-between select-none border-0 outline-0 ">
+                <li className="bg-position-[0_-2px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}>
+                  <span className="start-0 text-[#b7b7b7] bottom-[-1.2em] transform -translate-x-[50%] w-auto text-[14.72px] leading-none whitespace-nowrap absolute cursor-pointer">0</span>
+                </li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+              
+                 <li className="bg-position-[0_-2px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}>
+                  <span className="start-0 text-[#b7b7b7] bottom-[-1.2em] transform -translate-x-[50%] w-auto text-[14.72px] leading-none whitespace-nowrap absolute cursor-pointer">120</span>
+                </li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+                
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[0_-2px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}>
+                  <span className="start-0 text-[#b7b7b7] bottom-[-1.2em] transform -translate-x-[50%] w-auto text-[14.72px] leading-none whitespace-nowrap absolute cursor-pointer">240</span>
+                </li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+               <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+               <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+               <li className="bg-position-[0_-2px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}>
+                  <span className="start-0 text-[#b7b7b7] bottom-[-1.2em] transform -translate-x-[50%] w-auto text-[14.72px] leading-none whitespace-nowrap absolute cursor-pointer">360</span>
+                </li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+
+                <li className="bg-position-[center_-92px] grow-0 shrink-0 basis-px bg-transparent bg-no-repeat m-0 p-0 relative cursor-pointer  " style={{backgroundImage:`url('/ver-line.gif')`}}></li>
+ 
+              </ul>
+
+              <div className="w-full bg-[rgba(33,37,41,0.34)] rounded-md h-2 start-0 -mt-[calc(0.8px/2)] top-1/2 -translate-y-1/2 cursor-pointer m-0 p-0 absolute text-[#212529]">
+                <div className="w-56.5 -left-px start-0 bg-[#01b3e4] rounded-md h-2 -mt-[calc(0.8px/2)]"></div>
+                <span className="-left-2 top-1/2 -translate-y-1/2 absolute border-[#01b3e4] text-white rounded-full bg-[#01b3e4] bg-no-repeat border-solid border outline-0 text-center w-4 h-4"></span>
+
+                <span className="left-55 top-1/2 -translate-y-1/2 absolute border-[#01b3e4] text-white rounded-full bg-[#01b3e4] bg-no-repeat border-solid border outline-0 text-center w-4 h-4"></span>
+              </div>
+              <div className="hidden pb-4 w-full text-[#212529] ">
+                <input type="text" className="leading-normal text-inherit font-[inherit] m-0 " />
+                <input type="text" className="leading-normal text-inherit font-[inherit] m-0 " />
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+          <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Keywords</h3>
+          <span className="text-[14.4px] w-full h-9.5 border-[rgba(33,37,41,0.2)] text-[#212529] bg-white leading-normal m-0 p-0 min-w-0 border border-solid font-[inherit] font-normal text-start shadow-none items-stretch relative overflow-hidden truncate appearance-none outline-0 inline-flex flex-row flex-nowrap align-middle rounded-md ">
+            <select  className="hidden text-[12.98px] w-full m-0 "></select>
+            <div className="p-0.75 gap-0.75 cursor-text min-w-0 w-full flex flex-row flex-wrap items-center m-0 ">
+              <div className="contents min-w-0 items-center relative "></div>
+              <input type="text" placeholder="Filter by keywords..." className="-m-0.75 py-1.5 px-3 w-full border-0 outline-0 text-inherit bg-[0_0] flex-1 relative z-1 truncate appearance-none " />
+            </div>
+
+            <span className="py-1.5 px-1.5 outline-0 flex-none self-center items-center cursor-pointer opacity-[0.5] m-0 hidden! ">
+              <span className="w-4 h-4 outline-0 leading-none justify-center inline-flex flex-row flex-nowrap items-center align-middle relative cursor-pointer ">
+                <svg viewBox="0 0 512 512" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M416 141.3 301.3 256 416 370.7 370.7 416 256 301.3 141.3 416 96 370.7 210.7 256 96 141.3 141.3 96 256 210.7 370.7 96z"></path></svg>
+              </span>
+            </span>
+            <span className="text-[14.4px] font-stretch-100% font-normal tracking-[normal] leading-[21.6px] absolute invisible -top-833.25 -left-833.25 m-0"></span>
+          </span>
+        </div>
+        
+
+      </div>
+
+      <div className="bg-[rgba(228,228,228,.7)] backdrop-blur-[10px] w-full mt-5 flex justify-center items-center rounded-[20px] h-11 ">
+        <div className="hidden! ">
+          <div className="relative transform -translate-y-5 ">
+            <div className="bg-white absolute rounded-full -left-5 top-0 opacity-0 m-0 w-10 h-10 "></div>
+            <div className="bg-white absolute rounded-full -left-5 top-0 opacity-0 m-0 w-10 h-10 "></div>
+            <div className="bg-white absolute rounded-full -left-5 top-0 opacity-0 m-0 w-10 h-10 "></div>
+          </div>
+        </div>
+        <p className="inline-flex items-center w-full h-full m-0 p-0 text-base ">
+          <Link href="/" className="text-[rgba(0,0,0,.5)] inline-flex items-center text-[19.2px] leading-none font-semibold w-full h-full justify-center underline-offset-[3px]">Search</Link>
+        </p>
       </div>
     </div>
   );
