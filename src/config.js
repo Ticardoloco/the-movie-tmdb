@@ -54,6 +54,10 @@ const config = {
 
     movie: {
       popular: "/movie/popular"
+    },
+
+    tv: {
+      popular: "/tv/popular"
     }
 
     
