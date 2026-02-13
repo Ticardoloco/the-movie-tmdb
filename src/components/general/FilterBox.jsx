@@ -32,8 +32,8 @@ const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchD
     getLanguageData()
   },[]);
   return (
-    <div>
-      <div className="min-w-65 w-65 border border-[#e3e3e3] rounded-lg flex flex-wrap justify-between overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.1)] bg-white">
+    <div className="lg:w-auto w-full">
+      <div className="min-w-full lg:min-w-65 w-full lg:w-65 border border-[#e3e3e3] rounded-lg flex flex-wrap justify-between overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.1)] bg-white">
         <div className="w-full flex justify-between flex-nowrap items-center py-3.5 px-4">
           <h2 className="inline-flex text-[17.6px] justify-between pr-2.5 w-full p-0 m-0 font-semibold ">
             Sort
@@ -101,7 +101,7 @@ const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchD
         </div>
       </div>
 
-      <div className="mt-3 in-w-65 w-65 border border-[#e3e3e3] rounded-lg flex flex-wrap justify-between overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.1)] bg-white">
+      <div className="mt-3 min-w-full lg:min-w-65 w-full lg:w-65 border border-[#e3e3e3] rounded-lg flex flex-wrap justify-between overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.1)] bg-white">
         <div className="w-full flex justify-between flex-nowrap items-center py-3.5 px-4">
           <h2 className="inline-flex text-[17.6px] justify-between pr-2.5 w-full p-0 m-0 font-semibold ">
             Where To Watch{" "}
@@ -206,7 +206,7 @@ const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchD
         </div>
       </div>
 
-      <div className="mt-3 in-w-65 w-65 border border-[#e3e3e3] rounded-lg flex flex-wrap justify-between overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.1)] bg-white">
+      <div className="mt-3 min-w-full lg:min-w-65 w-full lg:w-65 border border-[#e3e3e3] rounded-lg flex flex-wrap justify-between overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.1)] bg-white">
         <div className="w-full flex justify-between flex-nowrap items-center py-3.5 px-4">
           <h2 className="inline-flex text-[17.6px] justify-between pr-2.5 w-full p-0 m-0 font-semibold">
             Filters
@@ -217,14 +217,14 @@ const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchD
               height={16}
               src="/dropdown.svg"
               alt="dropdown"
-              className={`transform rotate-0 ${filterDropDown ? "rotate-90" : " rotate-0"}`}
+              className={`transform rotate-0 ${filterDropDown ? "rotate-0 lg:rotate-90" : " rotate-90 lg:rotate-0"}`}
               onClick={() => setFilterDropDown(!filterDropDown)}
             />
           </span>
         </div>
 
         <div
-          className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}
+          className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "hidden lg:block" : "block lg:hidden"}`}
         >
           <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">
             Show Me
@@ -264,7 +264,7 @@ const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchD
         </div>
 
         <div
-          className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}
+          className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "hidden lg:block" : "block lg:hidden"}`}
         >
           <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">
             Availability
@@ -466,7 +466,7 @@ const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchD
           </div>
         </div>
 
-        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "hidden lg:block" : "block lg:hidden"}`}>
         <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Released Date</h3>
 
          <label className="inline-flex items-center w-full mb-[unset]">
@@ -787,7 +787,7 @@ const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchD
 
         </div>
 
-        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "hidden lg:block" : "block lg:hidden"}`}>
             <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Genres</h3>
 
             <ul className="-mt-2 m-0 p-0 ">
@@ -799,12 +799,12 @@ const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchD
             </ul>
         </div>
 
-        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "hidden lg:block" : "block lg:hidden"}`}>
           <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Certification</h3>
           <ul className="-mt-2 m-0 p-0"></ul>
         </div>
 
-        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "hidden lg:block" : "block lg:hidden"}`}>
             <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Adult Content</h3>
 
             <span className="text-[14.4px] w-full text-[#212529] bg-white border-[rgba(33,37,41,0.2)] leading-normal cursor-pointer m-0 p-0 min-w-0 border font-normal text-start shadow-none items-stretch relative overflow-hidden truncate appearance-none outline-0 inline-flex flex-row flex-nowrap align-middle rounded-md ">
@@ -842,7 +842,7 @@ const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchD
           </span>
         </div>
 
-        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "hidden lg:block" : "block lg:hidden"}`}>
           <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Language <span className="ml-1.5 opacity-[0.4] font-normal inline-flex items-center relative top-0 left-0 min-w-4 w-4 min-h-4 h-4 justify-center">
             <Image
             width={16}
@@ -889,7 +889,7 @@ const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchD
 
         </div>
 
-        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "hidden lg:block" : "block lg:hidden"}`}>
           <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">User Score</h3>
           <div className="pb-4 w-full text-[#212529] flex-row flex-nowrap h-fit gap-2 border-0 outline-0 text-base leading-normal bg-[0_0] inline-flex items-center relative ">
             <div className="h-6.5 grow shrink basis-auto flex relative touch-none text-[#212529]">
@@ -939,7 +939,7 @@ const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchD
         </div>
 
         
-        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "hidden lg:block" : "block lg:hidden"}`}>
           <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Minimum User Votes</h3>
           <div className="pb-4 w-full text-[#212529] flex-row flex-nowrap h-fit gap-2 border-0 outline-0 text-base leading-normal bg-[0_0] inline-flex items-center relative ">
             <div className="h-6.5 grow shrink basis-auto flex relative touch-none text-[#212529]">
@@ -994,7 +994,7 @@ const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchD
           </div>
         </div>
 
-        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "hidden lg:block" : "block lg:hidden"}`}>
           <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Runtime</h3>
           <div className="pb-4 w-full text-[#212529] flex-row flex-nowrap h-fit gap-2 border-0 outline-0 text-base leading-normal bg-[0_0] inline-flex items-center relative ">
             <div className="h-6.5 grow shrink basis-auto flex relative touch-none text-[#212529]">
@@ -1078,7 +1078,7 @@ const FilterBox = ({ text1, genresDatas, sortDropDown, setSortDropDown, toWatchD
         </div>
 
 
-        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "block" : "hidden"}`}>
+        <div className={`w-full border-t border-t-[#eee] pt-3.5 px-4 pb-4 ${filterDropDown ? "hidden lg:block" : "block lg:hidden"}`}>
           <h3 className="inline-flex items-center w-full text-base font-light mb-2.5 m-0 p-0">Keywords</h3>
           <span className="text-[14.4px] w-full h-9.5 border-[rgba(33,37,41,0.2)] text-[#212529] bg-white leading-normal m-0 p-0 min-w-0 border border-solid font-[inherit] font-normal text-start shadow-none items-stretch relative overflow-hidden truncate appearance-none outline-0 inline-flex flex-row flex-nowrap align-middle rounded-md ">
             <select  className="hidden text-[12.98px] w-full m-0 "></select>

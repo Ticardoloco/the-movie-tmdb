@@ -50,6 +50,10 @@ const config = {
 
     configuration: {
       Language: '/configuration/languages'
+    },
+
+    movie: {
+      popular: "/movie/popular"
     }
 
     
