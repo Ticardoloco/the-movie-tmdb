@@ -20,7 +20,12 @@ const activeLabel = slideLabelMap[slide] || text2;
       <h2 className="mr-5 whitespace-nowrap m-0 font-semibold text-2xl p-0 leading-none text-black">{text1}</h2>
       <div className="box-border hidden lg:block">
         <div className="items-stretch border border-[rgb(17,46,70)] rounded-[30px] flex justify-start ">
-            <div onClick={()=>setSlide("text2")} className="relative top-0 left-0 z-1 ">
+
+        {  ["text1", "text2", "text3", "text4", "text5", "text6"].map(cur=> <div onClick={()=>setSlide(cur)} className="relative top-0 left-0 z-1 ">
+                <h3 className="text-base  mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0 "><Link className={`transition-colors  py-1 px-5 rounded-[30px]  duration-500  font-semibold ${slide==="text2"?"text-[#1ed5a9] bg-[rgb(3,37,65)] ":"text-[rgb(3,37,65)]"}`} href="/">{text2}</Link></h3>
+                
+            </div>)}
+            {/* <div onClick={()=>setSlide("text2")} className="relative top-0 left-0 z-1 ">
                 <h3 className="text-base  mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0 "><Link className={`transition-colors  py-1 px-5 rounded-[30px]  duration-500  font-semibold ${slide==="text2"?"text-[#1ed5a9] bg-[rgb(3,37,65)] ":"text-[rgb(3,37,65)]"}`} href="/">{text2}</Link></h3>
                 
             </div>
@@ -48,7 +53,7 @@ const activeLabel = slideLabelMap[slide] || text2;
               <div onClick={()=>setSlide("text6")} className="relative top-0 left-0 z-1">
                  <h3 className="text-base  mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0 "><Link className={`transition-colors  py-1 px-5 rounded-[30px]  duration-500  font-semibold ${slide==="text6"?"text-[#1ed5a9] bg-[rgb(3,37,65)] ":"text-[rgb(3,37,65)]"}`} href="/">{text6}</Link></h3>
             </div>
-            )}
+            )} */}
 
 
             
