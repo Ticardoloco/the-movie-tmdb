@@ -6,8 +6,7 @@ import api from "@/services/httpService";
 import config from "@/config";
 
 const Trending = () => {
-  const [slideTrend, setSlideTrend] = useState("text2");
-  const [slideTrend2, setSlideTrend2] = useState("today");
+  const [slideTrend, setSlideTrend] = useState("Today");
   const [dropDownTrend, setDropDownTrend] = useState(false);
   const [trendingDatas, setTrendingDatas] = useState([]);
   const [trendingWeekDatas, setTrendingWeekDatas] = useState([]);
@@ -43,18 +42,16 @@ const Trending = () => {
           <div className="w-full">
             <Title
               text1={"Trending"}
-              text2={"Today"}
-              text3={"This Week"}
               titleList={["Today", "This Week"]}
-              slide={slideTrend2}
-              setSlide={setSlideTrend2}
+              slide={slideTrend}
+              setSlide={setSlideTrend}
               dropDown={dropDownTrend}
               setDropDown={setDropDownTrend}
             />
 
             <div className="relative top-0 left-0 flex justify-center w-full min-w-full flex-wrap items-start content-start ">
               <div className="min-h-0 h-auto w-full min-w-full max-w-350 overflow-x-scroll custom-scroll overflow-y-hidden transition-[height] duration-500 ease-linear flex gap-5 justify-start items-start py-5 px-5 lg:px-10 whitespace-normal ">
-                {slideTrend2 === "Today" &&
+                {slideTrend === "Today" &&
                   trendingDatas.map((item) => (
                     <DataBox
                       key={item.id}
@@ -66,7 +63,7 @@ const Trending = () => {
                     />
                   ))}
 
-                {slideTrend2 === "This Week" &&
+                {slideTrend === "This Week" &&
                   trendingWeekDatas.map((item) => (
                     <DataBox
                       key={item.id}

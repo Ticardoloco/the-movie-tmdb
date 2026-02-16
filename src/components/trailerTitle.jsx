@@ -3,54 +3,24 @@ import { ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
-const TrailerTitle = ({text1, text2, text3, text4, text5, text6, slide, setSlide, dropDown, setDropDown}) => {
+const TrailerTitle = ({text1, titleList, slide, setSlide, dropDown, setDropDown}) => {
 
-  const slideLabelMap = {
-  text2,
-  text3,
-  text4,
-  text5,
-  text6,
-};
+ 
 
-const activeLabel = slideLabelMap[slide] || text2;
+const activeLabel = slide || titleList?.[0] || "";
 
   return (
     <div className=' flex px-5 lg:px-10  justify-start items-center relative z-2'>
       <h2 className="mr-5 whitespace-nowrap m-0 font-semibold text-2xl p-0 leading-none text-[#efefef]">{text1}</h2>
       <div className="box-border hidden lg:block">
         <div className="items-stretch border border-[#1ed5a9] rounded-[30px] flex justify-start ">
-            <div onClick={()=>setSlide("text2")} className="relative top-0 left-0 z-1 ">
-                <h3 className="text-base  mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0 "><Link className={`transition-colors  py-1 px-5 rounded-[30px]  duration-500  font-semibold ${slide==="text2"?"bg-[linear-gradient(to_right,#c0fecf_0%,#1ed5a9_100%)] text-[rgb(3,37,65)] ":"text-[#efefef]"}`} href="/">{text2}</Link></h3>
+            {titleList?.map(cur=>(
+              <div key={cur} onClick={()=>setSlide(cur)} className="relative top-0 left-0 z-1 ">
+                <h3 className="text-base  mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0 "><Link className={`transition-colors  py-1 px-5 rounded-[30px]  duration-500  font-semibold ${slide===cur?"bg-[linear-gradient(to_right,#c0fecf_0%,#1ed5a9_100%)] text-[rgb(3,37,65)] ":"text-[#efefef]"}`} href="/">{cur}</Link></h3>
                 
             </div>
 
-            <div onClick={()=>setSlide("text3")} className="relative top-0 left-0 z-1">
-                 <h3 className="text-base mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0 "><Link className={`transition-colors  py-1 px-5 rounded-[30px]  duration-500  font-semibold ${slide==="text3"?"bg-[linear-gradient(to_right,#c0fecf_0%,#1ed5a9_100%)] text-[rgb(3,37,65)] ":"text-[#efefef]"}`} href="/">{text3}</Link></h3>
-            </div>
-
-            
-            {text4 && (
-              <div onClick={()=>setSlide("text4")} className="relative top-0 left-0 z-1">
-                 <h3 className="text-base  mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0 "><Link className={`transition-colors  py-1 px-5 rounded-[30px]  duration-500  font-semibold ${slide==="text4"?"bg-[linear-gradient(to_right,#c0fecf_0%,#1ed5a9_100%)] text-[rgb(3,37,65)] ":"text-[#efefef]"}`} href="/">{text4}</Link></h3>
-            </div>
-            )}
-
-            
-            {text5 && (
-              <div onClick={()=>setSlide("text5")} className="relative top-0 left-0 z-1">
-                 <h3 className="text-base  mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0 "><Link className={`transition-colors  py-1 px-5 rounded-[30px]  duration-500  font-semibold ${slide==="text5"?"bg-[linear-gradient(to_right,#c0fecf_0%,#1ed5a9_100%)] text-[rgb(3,37,65)] ":"text-[#efefef]"}`} href="/">{text5}</Link></h3>
-            </div>
-            )}
-
-            
-            {text6 && (
-              <div onClick={()=>setSlide("text6")} className="relative top-0 left-0 z-1">
-                 <h3 className="text-base  mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0 "><Link className={`transition-colors  py-1 px-5 rounded-[30px]  duration-500  font-semibold ${slide==="text6"?"bg-[linear-gradient(to_right,#c0fecf_0%,#1ed5a9_100%)] text-[rgb(3,37,65)] ":"text-[#efefef]"}`} href="/">{text6}</Link></h3>
-            </div>
-            )}
-
-
+            ))}
             
         </div>
       </div>
@@ -68,75 +38,19 @@ const activeLabel = slideLabelMap[slide] || text2;
 
            {dropDown?
             <div>
-              {slide!=="text2" &&(
-                 <div onClick={()=>{setSlide('text2'); setDropDown(false);}} className={`${slide==="text2"?"block rounded-[30px] bg-[#1ed5a9]":""}`}>
-              <h3 className="text-base py-1 px-5 mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0">
+              
+                 {titleList?.map(cur=>(
+                  <div key={cur} onClick={()=>{setSlide(cur); setDropDown(false);}} className={`${slide===cur?"block rounded-[30px] bg-[#1ed5a9]":""}`}>
+                    {slide !== cur && (
+                      <h3 className="text-base py-1 px-5 mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0">
                  <div className="flex items-center">
-                 <Link className="text-[rgb(3,37,65)] transition-[color,-webkit-text-fill-color] duration-500 font-semibold outline-0 flex content-center items-center" href="/">{text2} </Link>
-                <span onClick={(e)=>{e.stopPropagation(); setDropDown(!dropDown);}} className={` ml-1 opacity-[1] filter [invert(89%)_sepia(21%)_saturate(454%)_hue-rotate(75deg)_brightness(104%)_contrast(99%)] items-center font-normal min-w-4 w-4 min-h-4 h-4 leading-[inherit] ${slide==="text2"?"inline-flex":"hidden"} text-[rgb(3,37,65)] `}><ChevronDown strokeWidth={4}/></span>
+                 <Link className="text-[rgb(3,37,65)] transition-[color,-webkit-text-fill-color] duration-500 font-semibold outline-0 flex content-center items-center" href="/">{cur} </Link>
+                <span onClick={(e)=>{e.stopPropagation(); setDropDown(!dropDown);}} className={` ml-1 opacity-[1] filter [invert(89%)_sepia(21%)_saturate(454%)_hue-rotate(75deg)_brightness(104%)_contrast(99%)] items-center font-normal min-w-4 w-4 min-h-4 h-4 leading-[inherit] ${slide===cur?"inline-flex":"hidden"} text-[rgb(3,37,65)] `}><ChevronDown strokeWidth={4}/></span>
                </div>
               </h3>
+                    )}
             </div>
-              )}
-
-              {slide!=="text3" &&(
-                 <div onClick={()=>{setSlide('text3'); setDropDown(false);}} className={`${slide==="text3"?"block rounded-[30px] bg-[#1ed5a9]":""}`}>
-              <h3 className="text-base py-1 px-5 mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0">
-                 <div className="flex items-center">
-                 <Link className="text-[rgb(3,37,65)] transition-[color,-webkit-text-fill-color] duration-500 font-semibold outline-0 flex content-center items-center" href="/">{text3} </Link>
-                <span onClick={(e)=>{e.stopPropagation(); setDropDown(!dropDown);}} className={` ml-1 opacity-[1] filter [invert(89%)_sepia(21%)_saturate(454%)_hue-rotate(75deg)_brightness(104%)_contrast(99%)] items-center font-normal min-w-4 w-4 min-h-4 h-4 leading-[inherit] ${slide==="text3"?"inline-flex":"hidden"} text-[rgb(3,37,65)] `}><ChevronDown strokeWidth={4}/></span>
-               </div>
-              </h3>
-            </div>
-              )}
-
-            
-             {slide!=="text4" && (
-              <div>
-                {text4 && (
-              <div onClick={()=>{setSlide('text4'); setDropDown(false);}} className={`${slide==="text4"?"block rounded-[30px] bg-[#1ed5a9]":""}`}>
-              <h3 className="text-base py-1 px-5 mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0">
-                 <div className="flex items-center">
-                 <Link className="text-[rgb(3,37,65)] transition-[color,-webkit-text-fill-color] duration-500 font-semibold outline-0 flex content-center items-center" href="/">{text4} </Link>
-                <span onClick={(e)=>{e.stopPropagation(); setDropDown(!dropDown);}} className={` ml-1 opacity-[1] filter [invert(89%)_sepia(21%)_saturate(454%)_hue-rotate(75deg)_brightness(104%)_contrast(99%)] items-center font-normal min-w-4 w-4 min-h-4 h-4 leading-[inherit] ${slide==="text4"?"inline-flex":"hidden"} text-[rgb(3,37,65)] `}><ChevronDown strokeWidth={4}/></span>
-               </div>
-              </h3>
-            </div>
-             )}
-
-              </div>
-             )}
-
-            {slide!=="text5" && (
-              <div>
-                {text5 && (
-               <div onClick={()=>{setSlide('text5'); setDropDown(false);}} className={`${slide==="text5"?"block rounded-[30px] bg-[#1ed5a9]":""}`}>
-              <h3 className="text-base py-1 px-5 mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0">
-                 <div className="flex items-center">
-                 <Link className="text-[rgb(3,37,65)] transition-[color,-webkit-text-fill-color] duration-500 font-semibold outline-0 flex content-center items-center" href="/">{text5} </Link>
-                <span onClick={(e)=>{e.stopPropagation(); setDropDown(!dropDown);}} className={` ml-1 opacity-[1] filter [invert(89%)_sepia(21%)_saturate(454%)_hue-rotate(75deg)_brightness(104%)_contrast(99%)] items-center font-normal min-w-4 w-4 min-h-4 h-4 leading-[inherit] ${slide==="text5"?"inline-flex":"hidden"} text-[rgb(3,37,65)] `}><ChevronDown strokeWidth={4}/></span>
-               </div>
-              </h3>
-            </div>
-            )}
-              </div>
-            )}
-
-             {slide!=="text6" && (
-              <div>
-                {text6 && (
-              <div onClick={()=>{setSlide('text6'); setDropDown(false);}} className={`${slide==="text6"?"block rounded-[30px] bg-[#1ed5a9]":""}`}>
-              <h3 className="text-base py-1 px-5 mb-0 whitespace-nowrap inline-flex items-center justify-center font-semibold leading-5 m-0">
-                <div className="flex items-center">
-                 <Link className="text-[rgb(3,37,65)] transition-[color,-webkit-text-fill-color] duration-500 font-semibold outline-0 flex content-center items-center" href="/">{text6} </Link>
-                <span onClick={(e)=>{e.stopPropagation(); setDropDown(!dropDown);}} className={` ml-1 opacity-[1] filter [invert(89%)_sepia(21%)_saturate(454%)_hue-rotate(75deg)_brightness(104%)_contrast(99%)] items-center font-normal min-w-4 w-4 min-h-4 h-4 leading-[inherit] ${slide==="text6"?"inline-flex":"hidden"} text-[rgb(3,37,65)] `}><ChevronDown strokeWidth={4}/></span>
-               </div>
-              </h3>
-            </div>
-             )}
-              </div>
-             )}
-
+                 ))}
 
             </div>
            : null}
