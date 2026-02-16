@@ -7,7 +7,7 @@ import config from '@/config';
 
 const Trailer = () => {
   const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
-  const [slideTrailer, setSlideTrailer] =useState("text2")
+  const [slideTrailer, setSlideTrailer] =useState("Popular")
   const [dropDown, setDropDown] = useState(false)
   const [trailerPopularDatas, setTrailerPopularDatas] = useState([]);
   const [trailerStreamingDatas, setTrailerStreamingDatas] = useState([]);
@@ -64,25 +64,25 @@ const Trailer = () => {
 }, []);
 
  useEffect(() => {
-  if (slideTrailer === "text2" && trailerPopularDatas.length > 0) {
+  if (slideTrailer === "Popular" && trailerPopularDatas.length > 0) {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveBg(trailerPopularDatas[0].backdrop_path);
   }
 
-  if (slideTrailer === "text3" && trailerStreamingDatas.length > 0) {
+  if (slideTrailer === "Streaming" && trailerStreamingDatas.length > 0) {
     setActiveBg(trailerStreamingDatas[0].backdrop_path);
   }
 
   
-  if (slideTrailer === "text4" && trailerOntvDatas.length > 0) {
+  if (slideTrailer === "On TV" && trailerOntvDatas.length > 0) {
     setActiveBg(trailerOntvDatas[0].backdrop_path);
   }
 
-  if (slideTrailer === "text5" && trailerRentDatas.length > 0) {
+  if (slideTrailer === "For Rent" && trailerRentDatas.length > 0) {
     setActiveBg(trailerRentDatas[0].backdrop_path);
   }
 
-  if (slideTrailer === "text6" && trailerTheaterDatas.length > 0) {
+  if (slideTrailer === "In Theaters" && trailerTheaterDatas.length > 0) {
     setActiveBg(trailerTheaterDatas[0].backdrop_path);
   }
 
@@ -100,27 +100,27 @@ const Trailer = () => {
         <div className="relative top-0 left-0 flex justify-center w-full min-w-full flex-wrap items-start content-start ">
           <div className=" flex-wrap max-w-screen w-full py-7.5  flex items-start content-start mb-0! pb-0!">
             <div className="w-full">
-              <TrailerTitle text1={"Latest Trailers"} text2={"Popular"} text3={"Streaming"} text4={"On TV"} text5={"For Rent"} text6={"In Theaters"} slide={slideTrailer} setSlide={setSlideTrailer} dropDown={dropDown} setDropDown={setDropDown}/>
+              <TrailerTitle titleList={["Popular", "Streaming", "On TV", "For Rent", "In Theaters"]} text1={"Latest Trailers"} slide={slideTrailer} setSlide={setSlideTrailer} dropDown={dropDown} setDropDown={setDropDown}/>
               
               <div className="min-h-0 h-auto w-full min-w-full max-w-350 overflow-x-scroll overflow-y-hidden custom-scroll transition-[height] duration-500 ease-linear flex justify-start items-start gap-5 px-5 lg:px-10 pt-5 pb-5">
-                {slideTrailer==="text2" && trailerPopularDatas.map((item)=>(
+                {slideTrailer==="Popular" && trailerPopularDatas.map((item)=>(
                    <TrailerBox key={item.id} id={item.id} title={item.title} description={item.original_title} image={item.backdrop_path} onHover={() => setActiveBg(item.backdrop_path)}/>
                 ))}
 
                 
-                {slideTrailer==="text3" && trailerStreamingDatas.map((item)=>(
+                {slideTrailer==="Streaming" && trailerStreamingDatas.map((item)=>(
                    <TrailerBox key={item.id} id={item.id} title={item.name} description={item.original_name} image={item.backdrop_path} onHover={() => setActiveBg(item.backdrop_path)}/>
                 ))}
 
-                {slideTrailer==="text4" && trailerOntvDatas.map((item)=>(
+                {slideTrailer==="On TV" && trailerOntvDatas.map((item)=>(
                    <TrailerBox key={item.id} id={item.id} title={item.name} description={item.original_name} image={item.backdrop_path} onHover={() => setActiveBg(item.backdrop_path)}/>
                 ))}
 
-                {slideTrailer==="text5" && trailerRentDatas.map((item)=>(
+                {slideTrailer==="For Rent" && trailerRentDatas.map((item)=>(
                    <TrailerBox key={item.id} id={item.id} title={item.name} description={item.original_name} image={item.backdrop_path} onHover={() => setActiveBg(item.backdrop_path)}/>
                 ))}
 
-                {slideTrailer==="text6" && trailerTheaterDatas.map((item)=>(
+                {slideTrailer==="In Theaters" && trailerTheaterDatas.map((item)=>(
                    <TrailerBox key={item.id} id={item.id} title={item.title} description={item.original_title} image={item.backdrop_path} onHover={() => setActiveBg(item.backdrop_path)}/>
                 ))}
 
