@@ -58,6 +58,10 @@ const config = {
 
     tv: {
       popular: "/tv/popular"
+    },
+
+    person: {
+      popular: "/person/popular"
     }
 
     
