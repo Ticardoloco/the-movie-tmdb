@@ -22,7 +22,7 @@ const MainContent = () => {
   return (
     <div className='justify-between content-start flex flex-wrap '>
       {personDatas.map(item=>(
-        <PersonCard key={item.id} name={item.name} image={item.profile_path} title={item.known_for[0].title} title1={item.known_for[0].name} title2={item.known_for[1].title} title3={item.known_for[2].title}/>
+        <PersonCard key={item.id} name={item.name} image={item.profile_path} title={item.known_for[0].title} title1={item.known_for[0].name} title2={item.known_for[1].title} title3={item.known_for[1].name} title4={item.known_for[2].title} title5={item.known_for[2].name}/>
       ))}
 
       <Pagination/>

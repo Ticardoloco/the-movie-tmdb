@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const PersonCard = ({id, image, name, title, title1, title2, title3}) => {
+const PersonCard = ({id, image, name, title, title1, title2, title3, title4, title5}) => {
   const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
   return (
     <div className='flex items-stretch '>
@@ -21,7 +21,7 @@ const PersonCard = ({id, image, name, title, title1, title2, title3}) => {
           <p className="p-0 w-full leading-[19.2px] m-0 text-base ">
             <Link href="/" className='font-semibold text-[17.6px] text-black '>{name}</Link>
           </p>
-          <p className="text-[14.4px] font-normal text-[rgba(0,0,0,0.6)] block mt-0 mb-0 p-0 w-full leading-[17.28px] m-0 ">{title} {title1}, {title2}, and {title3}</p>
+          <p className="text-[14.4px] font-normal text-[rgba(0,0,0,0.6)] block mt-0 mb-0 p-0 w-full leading-[17.28px] m-0 ">{title}{title1}, {title2}{title3}, and {title4}{title5}</p>
         </div>
       </div>
     </div>
