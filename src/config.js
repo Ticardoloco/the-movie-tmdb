@@ -62,6 +62,10 @@ const config = {
 
     person: {
       popular: "/person/popular"
+    },
+
+    details: {
+      movie_list: "/movie",
     }
 
     

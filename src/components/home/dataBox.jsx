@@ -11,7 +11,7 @@ const DataBox = ({id, title, poster, rating, date}) => {
             backgroundImage: `url('/img-card-bg.svg')`
     ,
           }}>
-            <Link className='inline-block w-full h-full text-black bg-position-[0_0] font-normal ' href="/">
+            <Link className='inline-block w-full h-full text-black bg-position-[0_0] font-normal ' href={''}>
                 <Image
                 fill
                 src={`${TMDB_IMAGE_BASE}/w220_and_h330_face${poster}`}
@@ -45,7 +45,7 @@ const DataBox = ({id, title, poster, rating, date}) => {
           </div>
         </div>
           <h2 className="text-base leading-normal m-0 w-full wrap-break-word font-semibold p-0">
-            <Link className='font-bold text-black decoration-solid update' href="/">{title}</Link>
+            <Link className='font-bold text-black decoration-solid update' href={''}>{title}</Link>
           </h2>
           <p className="text-base m-0 p-0 text-[rgba(0,0,0,0.6)]">{date}</p>
       </div>

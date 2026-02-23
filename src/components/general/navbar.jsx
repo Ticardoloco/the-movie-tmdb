@@ -13,7 +13,7 @@ const NavBar = () => {
                     <Image
                       width={154}
                       height={20}
-                      src="./tmdb-desktop-logo.svg"
+                      src="/tmdb-desktop-logo.svg"
                       alt='logo'
                       className='mr-4'
                     />
@@ -34,7 +34,7 @@ const NavBar = () => {
                     <Image
                       width={55}
                       height={39.64}
-                      src="./tmdb-mobile-logo.svg"
+                      src="/tmdb-mobile-logo.svg"
                       alt='logo'
                       className='block lg:hidden justify-self-center'
                     />
@@ -51,7 +51,7 @@ const NavBar = () => {
                       </div>
                     </li>
                     <li className="ml-3.5 lg:ml-7.5 items-center flex"><Link href="/" className='py-1 items-center content-center text-white font-semibold'><span className="min-w-8 w-8 min-h-8 h-8 text-center uppercase rounded-full text-white text-[14.4px] font-semibold flex items-center justify-center bg-[#0177d2]">T</span></Link></li>
-                    <li className="ml-3.5 lg:ml-7.5 items-center flex"><Link href="/" className='text-[20.8px] h-full inline-flex items-center text-white font-semibold'><Image width={29.12} height={29.12} alt='search' src="./search-blue.svg" className='relative top-0 left-0 inline-flex min-w-[29.12] w-[29.12] min-h-[29.12] h-[29.12] items-center justify-center'/></Link></li>
+                    <li className="ml-3.5 lg:ml-7.5 items-center flex"><Link href="/" className='text-[20.8px] h-full inline-flex items-center text-white font-semibold'><Image width={29.12} height={29.12} alt='search' src="/search-blue.svg" className='relative top-0 left-0 inline-flex min-w-[29.12] w-[29.12] min-h-[29.12] h-[29.12] items-center justify-center'/></Link></li>
                   </ul>
                 </div>
         </div>

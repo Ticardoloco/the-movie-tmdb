@@ -65,7 +65,7 @@ const MainContent = () => {
               <div className="-mt-7.5 ">
                 <div className="w-full flex flex-row justify-between flex-wrap ">
                   {moviePopularDatas.map((item)=>(
-                    <MovieBox key={item.id} poster={item.poster_path} title={item.title} id={item.id} date={item.release_date} rating={item.vote_average} description={item.overview}/>
+                    <MovieBox key={item.id} poster={item.poster_path} title={item.title} id={`/movie/${item.id}`} date={item.release_date} rating={item.vote_average} description={item.overview}/>
                   ))}
                   <div className="border-0 mt-0 h-0 shadow-none relative top-0 left-0 flex flex-wrap content-start rounded-lg overflow-hidden  w-[175.66px] max-w-[calc((1400px-80px-260px-(30px*4))/4)] bg-white "></div>
                   <div className="border-0 mt-0 h-0 shadow-none relative top-0 left-0 flex flex-wrap content-start rounded-lg overflow-hidden  w-[175.66px] max-w-[calc((1400px-80px-260px-(30px*4))/4)] bg-white "></div>
@@ -81,7 +81,7 @@ const MainContent = () => {
                     </div>
 
                     <p className="mb-0 justify-center w-full h-full text-center m-0 p-0 flex flex-wrap text-base ">
-                      <Link href='/' className="text-2xl font-bold text-white w-full h-full [text-underline-offset:3px] justify-center flex items-center ml-1 mr-1 text-center ">Load More</Link>
+                      <Link href='/' className="text-2xl font-bold text-white w-full h-full underline-offset-[3px] justify-center flex items-center ml-1 mr-1 text-center ">Load More</Link>
                     </p>
                   </div>
                 </div>

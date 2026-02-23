@@ -10,7 +10,7 @@ const MovieBox = ({id, title, poster, rating, date, description}) => {
       <div className="w-23.5 lg:w-full h-35.25 lg:h-full relative top-0 left-0 rounded-none border-0 bg-[#dbdbdb] bg-size-[50%] inline-flex min-w-23.5 lg:min-w-4 min-h-4 leading-[inherit] bg-position-[center_center] bg-no-repeat text-inherit items-center justify-center" style={{
             backgroundImage: `url('/img-card-bg.svg')`
           }}>
-            <Link href="/" className='inline-block w-full h-full text-black '>
+            <Link href={id} className='inline-block w-full h-full text-black '>
             <Image
             fill  
             src={`${TMDB_IMAGE_BASE}/w220_and_h330_face${poster}`}

@@ -55,7 +55,7 @@ const Trending = () => {
                   trendingDatas.map((item) => (
                     <DataBox
                       key={item.id}
-                      id={item.id}
+                      id={`/movie/${item.id}`}
                       poster={item.poster_path}
                       title={item.title}
                       rating={item.vote_average}
