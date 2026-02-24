@@ -50,6 +50,22 @@ const Page = () => {
       }
     }
 
+      const formattedDate = movieDetailDatas?.release_date
+  ? (() => {
+      const [year, month, day] =
+        movieDetailDatas.release_date.split("-");
+      return `${month}-${day}-${year}`;
+    })()
+  : null;
+
+  const formattedRuntime = movieDetailDatas?.runtime
+  ? (() => {
+      const hours = Math.floor(movieDetailDatas.runtime / 60);
+      const minutes = movieDetailDatas.runtime % 60;
+      return `${hours}h ${minutes}m`;
+    })()
+  : null;
+
 
 
     useEffect(()=>{
@@ -61,20 +77,14 @@ const Page = () => {
       return <div>loading...</div>
     }
 
-    const formattedDate = movieDetailDatas?.release_date
-  ? (() => {
-      const [year, month, day] =
-        movieDetailDatas.release_date.split("-");
-      return `${month}-${day}-${year}`;
-    })()
-  : null;
+  
   return (
     <div className='w-full flex justify-center flex-wrap items-start bg-cover bg-no-repeat bg-position-[50%_50%] '>
       <ShortcutBar/>
       <div className="mt-27.5 border-b border-solid border-[rgb(220.5,220.5,220.5)] bg-[position:left_calc((50vw-170px)-340px)_top bg-cover bg-no-repeat w-full relative z-1 border-none bg-[linear-gradient(to_bottom_right,rgba(221,221,221,1),rgba(221,221,221,0.84))] border" style={{backgroundImage:`url(${TMDB_IMAGE_BASE}${size}${movieDetailDatas?.backdrop_path})`}}>
         <div className="bg-[rgba(0,0,0,0.7)] flex justify-center flex-wrap ">
           <div className="py-7.5 px-10 max-w-350 w-full z-0 ">
-            <DataDetail poster={movieDetailDatas.poster_path} title={movieDetailDatas.title} year={movieDetailDatas.release_date.slice(0,4)} certification={certificationDatas} date={formattedDate} country={movieDetailDatas.origin_country} genres={movieDetailDatas.genres}/>
+            <DataDetail poster={movieDetailDatas.poster_path} title={movieDetailDatas.title} year={movieDetailDatas.release_date.slice(0,4)} certification={certificationDatas} date={formattedDate} country={movieDetailDatas.origin_country} genres={movieDetailDatas.genres} runtime={formattedRuntime} rating={movieDetailDatas.vote_average}/>
           </div>
         </div>
       </div>

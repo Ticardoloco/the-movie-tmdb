@@ -45,7 +45,7 @@ const DataBox = ({id, title, poster, rating, date}) => {
           </div>
         </div>
           <h2 className="text-base leading-normal m-0 w-full wrap-break-word font-semibold p-0">
-            <Link className='font-bold text-black decoration-solid update' href={''}>{title}</Link>
+            <Link className='font-bold text-black decoration-solid leading-normal wrap-break-word hover:underline decoration-[#0177d2] hover:text-[#0177d2]' href={''}>{title}</Link>
           </h2>
           <p className="text-base m-0 p-0 text-[rgba(0,0,0,0.6)]">{date}</p>
       </div>
