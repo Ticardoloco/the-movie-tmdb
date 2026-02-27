@@ -2,10 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
-const DataDetail = ({poster, title, year, certification, date, country, genres, runtime, rating}) => {
+const DataDetail = ({poster, title, year, certification, date, country, genres, runtime, rating, play, tagline, overview}) => {
   const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
   const size = "/w300_and_h450_multi_faces_filter(blur)";
-  const size2= "/w300_and_h450_face/";
+  const size2= "/w300_and_h450_face";
   return (
     <div className='flex flex-nowrap '>
       <div className="border-0 min-w-75 w-75 h-112.5 overflow-hidden rounded-lg group ">
@@ -116,17 +116,67 @@ const DataDetail = ({poster, title, year, certification, date, country, genres, 
                       ):null}
                   </div>
                 </div>
-                <div className="p-[8px_8px_8px_12px] ease-in-out duration-150 bg-[#032541] rounded-full justify-center items-center cursor-pointer transform transition flex hover:scale-104 ">
+                <div className="p-[8px_8px_8px_12px] ease-in-out duration-150 bg-[#032541] rounded-full justify-center items-center cursor-pointer transform transition flex hover:scale-104">
                   <div className="justify-center items-center flex ">
                     <div className="text-white font-bold items-center cursor-pointer transform-[translate(0,0)_rotate(0)_skewX(0)_skewY(0)_scaleX(1)_scaleY(1)] flex ">
-                      <div className="whitespace-nowrap items-center flex-nowrap flex ">What&apos;s your <span className="flex underline pl-1 underline-offset-2 decoration-2 decoration-[#01b4e4]">Vibe</span>? <span className="relative top-0 left-0 inline-flex min-w-4 w-4 min-h-4 h-4 leading-[inherit] bg-center bg-no-repeat color-inherit items-center justify-center ml-1" style={{backgroundImage:`url('/idot.svg')`}}></span></div>
+                      <div className="whitespace-nowrap items-center flex-nowrap flex ">What&apos;s your <span className="flex underline pl-1 underline-offset-2 decoration-2 decoration-[#01b4e4]">Vibe</span>? <span className="relative top-0 left-0 inline-flex min-w-4 w-4 min-h-4 h-4 leading-[inherit] bg-center bg-no-repeat color-inherit items-center justify-center ml-1 group" style={{backgroundImage:`url('/idot.svg')`}}></span></div>
+
+                      <div className="hidden absolute left-full ml-4 w-72 text-white font-normal cursor-pointer opacity-0 group-hover:block group-hover:opacity-100 ease-in-out duration-200">
+                        <p className="text-sm m-[0_0_16px] p-0 text-white">Welcome to vibes, TMDB&apos;s new rating system! for more information, visit the <span className="underline-offset-2 underline italic "><Link href="https://www.themoviedb.org/bible/general#65dd0c6c7314a13a50071ddb">contribution bible</Link></span>.</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            <ul className="mb-5 w-full h-17 flex items-center justify-start m-0 p-0">
+              <li className="py-0.75 mr-5 ">
+                <Link href="" className='bg-[rgba(3,37,65,1)] rounded-full h-11.5 w-11.5 inline-flex justify-center items-center font-normal duration-200 ease-in-out hover:scale-110'>
+                <span className="relative top-0 left-0 inline-flex min-w-4 w-4 min-h-4 h-4 leading-[inherit] bg-center bg-no-repeat text-inherit justify-center items-center" style={{backgroundImage:`url("/thumbnails.svg")`}}></span>
+                </Link>
+              </li>
+
+              <li className="py-0.75 mr-5 ">
+                <Link href="" className='bg-[rgba(3,37,65,1)] rounded-full h-11.5 w-11.5 inline-flex justify-center items-center font-normal duration-200 ease-in-out hover:scale-110'>
+                <span className="relative top-0 left-0 inline-flex min-w-4 w-4 min-h-4 h-4 leading-[inherit] bg-center bg-no-repeat text-inherit justify-center items-center" style={{backgroundImage:`url("/heart.svg")`}}></span>
+                </Link>
+              </li>
+
+              <li className="py-0.75 mr-5 ">
+                <Link href="" className='bg-[rgba(3,37,65,1)] rounded-full h-11.5 w-11.5 inline-flex justify-center items-center font-normal duration-200 ease-in-out hover:scale-110'>
+                <span className="relative top-0 left-0 inline-flex min-w-4 w-4 min-h-4 h-4 leading-[inherit] bg-center bg-no-repeat text-inherit justify-center items-center" style={{backgroundImage:`url("/bookmark.svg")`}}></span>
+                </Link>
+              </li>
+
+              <div className="hidden items-center ">
+                 <li className="py-0.75 mr-0 justify-center items-center flex-col flex ">
+                <Link href="" className='bg-[rgba(3,37,65,1)] rounded-full h-11.5 w-11.5 inline-flex justify-center items-center font-normal duration-200 ease-in-out hover:scale-110'>
+                <span className="relative top-0 left-0 inline-flex min-w-4 w-4 min-h-4 h-4 leading-[inherit] bg-center bg-no-repeat text-inherit justify-center items-center" style={{backgroundImage:`url("/star.svg")`}}></span>
+                </Link>
+              </li>
+                  <div className="hidden absolute left-full ml-4 w-72 text-white font-normal cursor-pointer opacity-0 group-hover:block group-hover:opacity-100 ease-in-out duration-200">
+                        <p className="text-sm m-[0_0_16px] p-0 text-white">Welcome to vibes, TMDB&apos;s new rating system! for more information, visit the <span className="underline-offset-2 underline italic "><Link href="https://www.themoviedb.org/bible/general#65dd0c6c7314a13a50071ddb">contribution bible</Link></span>.</p>
+                    </div>
+              </div>
+                
+                <li className="mr-0 items-center flex ml-1 ">
+                  <Link href={`${play}`} className='border-0 bg-[0_0] w-auto h-auto will-change-[opacity] font-semibold [transition:linear_.1s] rounded-full inline-flex justify-center items-center text-white hover:opacity-70'><span className="mr-1.25 text-[22.4px] relative top-0 left-0 inline-flex min-w-[22.4px] w-[22.4px] min-h-[22.4px] h-[22.4px] leading-[inherit] bg-center bg-no-repeat text-inherit justify-center items-center filter-[invert(1)]" style={{backgroundImage:`url("/play.svg")`}}></span> Play Trailer</Link>
+                </li>
+              
+            </ul>
+          </div>
+
+          <div className="w-full">
+            <h3 className="mb-5 text-[19.2px] font-normal italic opacity-70 w-full m-[0_0_8px] p-0 leading-none ">{tagline}</h3>
+            <h3 className="mt-2.5 w-full m-[0_0_8px] font-semibold text-[20.8px] leading-none p-0">Overview</h3>
+
+            <div>
+              <p className="mb-0 text-base leading-6 font-normal m-[0_0_16px] p-0">{overview}</p>
+            </div>
           </div>
         </section>
+
       </div>
     </div>
   )

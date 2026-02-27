@@ -4,14 +4,14 @@ import React from 'react'
 const ShortcutBar = () => {
   return (
     <div className='w-full justify-center bg-white flex items-center absolute z-2 top-16 left-0 '>
-      <div className="w-auto! h-11.5! m-0 p-0 border-0 relative flex items-center">
+      <div className="w-full lg:w-auto! h-11.5! m-0 p-0 border-0 relative flex items-center">
         <span className="hidden text-[color-mix(in_srgb,#212529,#212529_50%,transparent)] p-1.5 border-transparent shadow-none! py-1.5 px-3 text-base leading-normal border border-solid font-normal text-center whitespace-nowrap items-center align-middle select-none cursor-pointer outline-0 appearance-none relative transition-colors ease-in-out">
           <span className="min-w-4 min-h-4 inline-flex items-center justify-center text-inherit self-center relative outline-0 w-4 h-4 leading-none flex-row flex-nowrap align-middle ">
            <svg viewBox="0 0 512 512" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="m160 256 192-128v256z"></path></svg>
           </span>
         </span>
 
-        <ul className="overflow-visible h-11.5! bg-white font-semibold flex-nowrap p-0 py-2 visible w-[unset!important] border-[rgba(33,37,41,0.2)] text-[#212529] flex-row border-0 border-solid outline-0 text-base leading-normal flex items-center relative cursor-default [-webkit-tap-highlight-color:transparent] ">
+        <ul className="overflow-visible h-11.5! bg-white font-semibold flex-nowrap p-0 py-2 visible w-[unset!important] border-[rgba(33,37,41,0.2)] text-[#212529] flex-row border-0 border-solid outline-0 text-base leading-normal flex lg:items-center items-stretch justify-start lg:justify-center pl-2.5 lg:pl-0 overflow-y-auto overflow-x-hidden max-w-full lg:max-w-auto  relative cursor-default [-webkit-tap-highlight-color:transparent] ">
           <li className="text-black font-normal border-0 outline-0 flex flex-col flex-nowrap flex-none relative select-none  group ">
             <span className="py-2 px-4 outline-0 gap-2 items-center relative whitespace-nowrap cursor-pointer flex flex-row flex-nowrap flex-[1_1_auto] ">
               <span className="overflow-hidden truncate flex flex-row flex-nowrap flex-[1_1_auto] hover:text-[#999] ">OverView</span>
@@ -64,7 +64,7 @@ const ShortcutBar = () => {
             </div>
           </li>
 
-          <li className=" ml-5 text-black font-normal border-0 outline-0 flex flex-col flex-nowrap flex-none relative select-none  group ">
+          <li className="ml-4 lg:ml-5 text-black font-normal border-0 outline-0 flex flex-col flex-nowrap flex-none relative select-none  group ">
             <span className="py-2 px-4 outline-0 gap-2 items-center relative whitespace-nowrap cursor-pointer flex flex-row flex-nowrap flex-[1_1_auto] ">
               <span className="overflow-hidden truncate flex flex-row flex-nowrap flex-[1_1_auto] hover:text-[#999] ">Media</span>
               <span className="-me-2 inline-flex flex-row flex-wrap items-center flex-none relative ">
@@ -107,7 +107,7 @@ const ShortcutBar = () => {
             </div>
           </li>
 
-          <li className=" ml-5 text-black font-normal border-0 outline-0 flex flex-col flex-nowrap flex-none relative select-none  group ">
+          <li className="ml-4 lg:ml-5 text-black font-normal border-0 outline-0 flex flex-col flex-nowrap flex-none relative select-none  group ">
             <span className="py-2 px-4 outline-0 gap-2 items-center relative whitespace-nowrap cursor-pointer flex flex-row flex-nowrap flex-[1_1_auto] ">
               <span className="overflow-hidden truncate flex flex-row flex-nowrap flex-[1_1_auto] hover:text-[#999] ">Fandom</span>
               <span className="-me-2 inline-flex flex-row flex-wrap items-center flex-none relative ">
@@ -136,7 +136,7 @@ const ShortcutBar = () => {
             </div>
           </li>
 
-          <li className=" ml-5 text-black font-normal border-0 outline-0 flex flex-col flex-nowrap flex-none relative select-none  group ">
+          <li className="ml-4 lg:ml-5 text-black font-normal border-0 outline-0 flex flex-col flex-nowrap flex-none relative select-none  group ">
             <span className="py-2 px-4 outline-0 gap-2 items-center relative whitespace-nowrap cursor-pointer flex flex-row flex-nowrap flex-[1_1_auto] ">
               <span className="overflow-hidden truncate flex flex-row flex-nowrap flex-[1_1_auto] hover:text-[#999] ">Share</span>
               <span className="-me-2 inline-flex flex-row flex-wrap items-center flex-none relative ">
