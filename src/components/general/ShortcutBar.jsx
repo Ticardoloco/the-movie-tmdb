@@ -11,7 +11,7 @@ const ShortcutBar = () => {
           </span>
         </span>
 
-        <ul className="overflow-visible h-11.5! bg-white font-semibold flex-nowrap p-0 py-2 visible w-[unset!important] border-[rgba(33,37,41,0.2)] text-[#212529] flex-row border-0 border-solid outline-0 text-base leading-normal flex lg:items-center items-stretch justify-start lg:justify-center pl-2.5 lg:pl-0 overflow-y-auto overflow-x-hidden max-w-full lg:max-w-auto  relative cursor-default [-webkit-tap-highlight-color:transparent] ">
+        <ul className="overflow-visible h-11.5! bg-white font-semibold flex-nowrap p-0 py-2 visible w-[unset!important] border-[rgba(33,37,41,0.2)] text-[#212529] flex-row border-0 border-solid outline-0 text-base leading-normal flex items-center  justify-start lg:justify-center pl-2.5 lg:pl-0 overflow-y-auto overflow-x-hidden max-w-full lg:max-w-auto  relative cursor-default [-webkit-tap-highlight-color:transparent] ">
           <li className="text-black font-normal border-0 outline-0 flex flex-col flex-nowrap flex-none relative select-none  group ">
             <span className="py-2 px-4 outline-0 gap-2 items-center relative whitespace-nowrap cursor-pointer flex flex-row flex-nowrap flex-[1_1_auto] ">
               <span className="overflow-hidden truncate flex flex-row flex-nowrap flex-[1_1_auto] hover:text-[#999] ">OverView</span>
