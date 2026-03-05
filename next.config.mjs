@@ -3,6 +3,10 @@ const nextConfig = {
   /* config options here */
   images: {
     remotePatterns: [
+       {
+      protocol: 'https',
+      hostname: 'secure.gravatar.com',
+    },
       {
         protocol: "https",
         hostname: "image.tmdb.org",

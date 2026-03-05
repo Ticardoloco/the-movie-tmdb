@@ -1,111 +1,229 @@
-"use client"
-import DataDetail from '@/components/general/DataDetail'
-import MobileDetail from '@/components/general/MobileDetail'
-import ShortcutBar from '@/components/general/ShortcutBar'
-import config from '@/config'
-import api from '@/services/httpService'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+"use client";
+import BackdropBox from "@/components/general/BackdropBox";
+import CastBox from "@/components/general/CastBox";
+import DataDetail from "@/components/general/DataDetail";
+import MediaBox from "@/components/general/MediaBox";
+import MediaTitle from "@/components/general/MediaTitle";
+import MobileDetail from "@/components/general/MobileDetail";
+import PosterBox from "@/components/general/PosterBox";
+import RecommendBox from "@/components/general/RecommendBox";
+import ReviewBox from "@/components/general/ReviewBox";
+import ShortcutBar from "@/components/general/ShortcutBar";
+import TitleMenu from "@/components/general/TitleMenu";
+import config from "@/config";
+import api from "@/services/httpService";
+import Image from "next/image";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const Page = () => {
-    const {id} = useParams()
-    const size = "/w1920_and_h800_multi_faces";
-    const smallSize = "/w1000_and_h450_multi_faces";
-    const size1 = "/w220_and_h330_multi_faces_filter(blur)";
-    const size2= "/w220_and_h330_face";
-    const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
-    const [isMobile, setIsMobile] = useState(false);
-    const [movieDetailDatas, setMovieDetailDatas] = useState(null);
-    const [certificationDatas, setCertificationDatas] = useState(null);
+  const { id } = useParams();
+  const size = "/w1920_and_h800_multi_faces";
+  const smallSize = "/w1000_and_h450_multi_faces";
+  const size1 = "/w220_and_h330_multi_faces_filter(blur)";
+  const size2 = "/w220_and_h330_face";
+  const size3 = "/w533_and_h300_face";
+  const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
+  const [social, setSocial] = useState("Reviews");
+  const [media, setMedia] = useState("Most Popular");
+  const [movieDetailDatas, setMovieDetailDatas] = useState(null);
+  const [certificationDatas, setCertificationDatas] = useState(null);
+  const [castDatas, setCastDatas] = useState([]);
+  const [reviewDatas, setReviewDatas] = useState(null);
+  const [randomReview, setRandomReview] = useState(null);
+  const [videoDatas, setVideoDatas] = useState([]);
+  const [backDropDatas, setBackDropDatas] = useState([]);
+  const [posterDatas, setPosterDatas] = useState([]);
+  const [recommendDatas, setRecommendDatas] = useState([]);
 
-    const getMovieDetailData = async () =>{
-    try{
-       const movieDetailData = await api.get(`${config.subUrl.details.movie_list}/${id}`)
-        
-        if (movieDetailData.status === 200) {
-          setMovieDetailDatas(movieDetailData.data)
-        }
-    } catch(error){
-      console.error("Couldn't fetch data", error);
-      
-    }
-    }
-
-    const getCertificationData = async ()=>{
-      try {
-        const certificationData = await api.get(`${config.subUrl.details.movie_list}/${id}/release_dates`)
-
-        if (certificationData.status === 200) {
-          const results = certificationData.data.results;
-
-           const usRelease = results.find(
-        (item) => item.iso_3166_1 === "US"
+  const getMovieDetailData = async () => {
+    try {
+      const movieDetailData = await api.get(
+        `${config.subUrl.details.movie_list}/${id}`,
       );
 
-      if (usRelease) {
-        const certification = usRelease.release_dates.find(
-          (r) => r.certification !== ""
-        )?.certification;
-        setCertificationDatas(certification);
+      if (movieDetailData.status === 200) {
+        setMovieDetailDatas(movieDetailData.data);
       }
-        }
-      } catch(error){
-        console.error("Could't fetch data", error);
-        
-      }
+    } catch (error) {
+      console.error("Couldn't fetch data", error);
     }
+  };
 
-      const formattedDate = movieDetailDatas?.release_date
-  ? (() => {
-      const [year, month, day] =
-        movieDetailDatas.release_date.split("-");
-      return `${month}-${day}-${year}`;
-    })()
-  : null;
+  const getCertificationData = async () => {
+    try {
+      const certificationData = await api.get(
+        `${config.subUrl.details.movie_list}/${id}/release_dates`,
+      );
+
+      if (certificationData.status === 200) {
+        const results = certificationData.data.results;
+
+        const usRelease = results.find((item) => item.iso_3166_1 === "US");
+
+        if (usRelease) {
+          const certification = usRelease.release_dates.find(
+            (r) => r.certification !== "",
+          )?.certification;
+          setCertificationDatas(certification);
+        }
+      }
+    } catch (error) {
+      console.error("Could't fetch data", error);
+    }
+  };
+
+  const formattedDate = movieDetailDatas?.release_date
+    ? (() => {
+        const [year, month, day] = movieDetailDatas.release_date.split("-");
+        return `${month}-${day}-${year}`;
+      })()
+    : null;
 
   const formattedRuntime = movieDetailDatas?.runtime
-  ? (() => {
-      const hours = Math.floor(movieDetailDatas.runtime / 60);
-      const minutes = movieDetailDatas.runtime % 60;
-      return `${hours}h ${minutes}m`;
-    })()
-  : null;
+    ? (() => {
+        const hours = Math.floor(movieDetailDatas.runtime / 60);
+        const minutes = movieDetailDatas.runtime % 60;
+        return `${hours}h ${minutes}m`;
+      })()
+    : null;
 
-
-
-    useEffect(()=>{
-     getMovieDetailData()
-     getCertificationData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[id])
-
-    useEffect(()=>{
-      const handleResize = ()=>{
-        setIsMobile(window.innerWidth < 1024);
+  const getCastData = async () => {
+    try {
+      const castData = await api.get(
+        `${config.subUrl.details.movie_list}/${id}/credits`,
+      );
+      if (castData.status === 200) {
+        setCastDatas(castData.data.cast);
       }
-
-      handleResize()
-      window.addEventListener("resize", handleResize);
-      return ()=> window.removeEventListener("resize", handleResize);
-    },[])
-
-    const backdropSize = isMobile ? smallSize : size;
-
-    if(!movieDetailDatas){
-      return <div>loading...</div>
+    } catch (error) {
+      console.error("Data couldn't fetch", error);
     }
+  };
 
-    
-  
+  const getReviewData = async () => {
+    try {
+      const reviewData = await api.get(
+        `${config.subUrl.details.movie_list}/${id}/reviews`,
+      );
+      if (reviewData.status === 200) {
+        setReviewDatas(reviewData.data);
+
+        const reviews = reviewData.data.results;
+
+        if (reviews && reviews.length > 0) {
+          const randomIndex = Math.floor(Math.random() * reviews.length);
+          setRandomReview(reviews[randomIndex]);
+        }
+      }
+    } catch (error) {
+      console.error("Data couldn't fetch", error);
+    }
+  };
+
+  const formattedReviewDate = randomReview?.created_at
+    ? new Date(randomReview.created_at).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : null;
+
+  const getVideoData = async () => {
+    try {
+      const videoData = await api.get(
+        `${config.subUrl.details.movie_list}/${id}/videos`,
+      );
+      if (videoData.status === 200) {
+        setVideoDatas(videoData.data.results);
+      }
+    } catch (error) {
+      console.error("Data couldn't fetch", error);
+    }
+  };
+
+  const getBackDropData = async () => {
+    try {
+      const backDropData = await api.get(
+        `${config.subUrl.details.movie_list}/${id}/images`,
+      );
+      if (backDropData.status === 200) {
+        setBackDropDatas(backDropData.data.backdrops);
+      }
+    } catch (error) {
+      console.error("Data couldn't fetch", error);
+    }
+  };
+
+  const getPosterData = async () => {
+    try {
+      const posterData = await api.get(
+        `${config.subUrl.details.movie_list}/${id}/images`,
+      );
+      if (posterData.status === 200) {
+        setPosterDatas(posterData.data.posters);
+      }
+    } catch (error) {
+      console.error("Data couldn't fetch", error);
+    }
+  };
+
+  const getRecommendData = async () => {
+    try {
+      const recommendData = await api.get(
+        `${config.subUrl.details.movie_list}/${id}/recommendations`,
+      );
+      if (recommendData.status === 200) {
+        setRecommendDatas(recommendData.data.results);
+      }
+    } catch (error) {
+      console.error("Data couldn't fetch", error);
+    }
+  };
+
+  useEffect(() => {
+    getMovieDetailData();
+    getCertificationData();
+    getCastData();
+    getReviewData();
+    getVideoData();
+    getBackDropData();
+    getPosterData();
+    getRecommendData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
+  if (!movieDetailDatas) {
+    return <div>loading...</div>;
+  }
+
   return (
-    <div className='w-full flex justify-center flex-wrap items-start bg-cover bg-no-repeat bg-position-[50%_50%] '>
-      <ShortcutBar/>
-      <div className="hidden lg:block mt-27.5 border-b border-solid border-[rgb(220.5,220.5,220.5)] bg-position-[left_calc((50vw-170px)-340px)_top] bg-cover  w-full relative z-1 bg-[linear-gradient(to_bottom_right,rgba(221,221,221,1),rgba(221,221,221,0.84))] border" style={{backgroundImage:`url(${TMDB_IMAGE_BASE}${size}${movieDetailDatas?.backdrop_path})`}}>
+    <div className="w-full flex justify-center flex-wrap items-start bg-cover bg-no-repeat bg-position-[50%_50%] ">
+      <ShortcutBar />
+      <div
+        className="hidden lg:block mt-27.5 border-b border-solid border-[rgb(220.5,220.5,220.5)] bg-position-[left_calc((50vw-170px)-340px)_top] bg-cover w-full relative z-1 bg-[linear-gradient(to_bottom_right,rgba(221,221,221,1),rgba(221,221,221,0.84))] border"
+        style={{
+          backgroundImage: `url(${TMDB_IMAGE_BASE}${size}${movieDetailDatas?.backdrop_path})`,
+        }}
+      >
         <div className="bg-[rgba(0,0,0,0.7)] flex justify-center flex-wrap ">
           <div className="py-7.5 px-10 max-w-350 w-full z-0 ">
-            <DataDetail poster={movieDetailDatas.poster_path} title={movieDetailDatas.title} year={movieDetailDatas.release_date.slice(0,4)} certification={certificationDatas} date={formattedDate} country={movieDetailDatas.origin_country} genres={movieDetailDatas.genres} runtime={formattedRuntime} rating={movieDetailDatas.vote_average} play={movieDetailDatas.homepage} tagline={movieDetailDatas.tagline} overview={movieDetailDatas.overview}/>
+            <DataDetail
+              poster={movieDetailDatas.poster_path}
+              title={movieDetailDatas.title}
+              year={movieDetailDatas.release_date.slice(0, 4)}
+              certification={certificationDatas}
+              date={formattedDate}
+              country={movieDetailDatas.origin_country}
+              genres={movieDetailDatas.genres}
+              runtime={formattedRuntime}
+              rating={movieDetailDatas.vote_average}
+              play={movieDetailDatas.homepage}
+              tagline={movieDetailDatas.tagline}
+              overview={movieDetailDatas.overview}
+            />
           </div>
         </div>
       </div>
@@ -116,33 +234,275 @@ const Page = () => {
             <section className="h-auto block ">
               <div className="shadow-none min-w-screen w-screen h-auto rounded-none border-0 overflow-hidden ">
                 <div className="w-full h-[calc(100vw/2.222222)] block aspect-[auto_calc(2/3)] relative top-0 left-0 rounded-md overflow-hidden">
-                <div className="bg-position-[calc((((100vw/2.222222)-20px)/1.5)/2)_0] bg-cover bg-no-repeat w-full h-full " style={{backgroundImage:`url(${TMDB_IMAGE_BASE}${smallSize}${movieDetailDatas?.backdrop_path})`}}>
-                <div className="bg-[linear-gradient(to_right,rgba(220.5,220.5,220.5,1)_20%,rgba(220.5,220.5,220.5,0)_50%)] w-full h-full absolute top-0 left-0 ">
-                  <div className="absolute top-5 left-5 w-[calc(((100vw/2.222222)-40px)/1.5)] min-w-[calc(((100vw/2.222222)-40px)/1.5)] h-[calc((100vw/2.222222)-40px)] min-h-[calc((100vw/2.222222)-40px)] rounded-md z-4 overflow-hidden aspect-[auto_calc(2/3)] bg-position-[0_0] bg-cover " style={{backgroundImage:`url(${TMDB_IMAGE_BASE}${size1}${movieDetailDatas.poster_path})`}}>
-                  <Image
-                  fill
-                  src={`${TMDB_IMAGE_BASE}${size2}${movieDetailDatas.poster_path}`}
-                  alt='poster'
-                  className='block w-full h-full min-w-full min-h-full border-0 outline-0 '
-                  />
+                  <div
+                    className="bg-position-[calc((((100vw/2.222222)-20px)/1.5)/2)_0] bg-cover bg-no-repeat w-full h-full "
+                    style={{
+                      backgroundImage: `url(${TMDB_IMAGE_BASE}${smallSize}${movieDetailDatas?.backdrop_path})`,
+                    }}
+                  >
+                    <div className="bg-[linear-gradient(to_right,rgba(220.5,220.5,220.5,1)_20%,rgba(220.5,220.5,220.5,0)_50%)] w-full h-full absolute top-0 left-0 ">
+                      <div
+                        className="absolute top-5 left-5 w-[calc(((100vw/2.222222)-40px)/1.5)] min-w-[calc(((100vw/2.222222)-40px)/1.5)] h-[calc((100vw/2.222222)-40px)] min-h-[calc((100vw/2.222222)-40px)] rounded-md z-4 overflow-hidden aspect-[auto_calc(2/3)] bg-position-[0_0] bg-cover "
+                        style={{
+                          backgroundImage: `url(${TMDB_IMAGE_BASE}${size1}${movieDetailDatas.poster_path})`,
+                        }}
+                      >
+                        <Image
+                          fill
+                          src={`${TMDB_IMAGE_BASE}${size2}${movieDetailDatas.poster_path}`}
+                          alt="poster"
+                          className="block w-full h-full min-w-full min-h-full border-0 outline-0 "
+                        />
+                      </div>
+                    </div>
+                    <div className="w-75 aspect-[auto_calc(2/3)] bg-[rgba(0,0,0,.7)] absolute top-0 left-0 text-center rounded-lg invisible opacity-0 group-hover:visible group-hover:opacity-100 [transition:linear_.2s] [backdrop-filter:blur(20px)]">
+                      <Link
+                        href=""
+                        className="text-white w-full aspect-[auto_calc(2/3)] inline-flex items-center justify-center text-[20.8px] font-normal underline"
+                      >
+                        <span
+                          className="mr-1.5 relative top-0 left-0 inline-flex w-4 min-w-4 h-4 min-h-4 bg-center bg-no-repeat text-inherit items-center justify-center "
+                          style={{ backgroundImage: `url("/expand.svg")` }}
+                        ></span>{" "}
+                        Expand
+                      </Link>
+                    </div>
                   </div>
-                </div>
-                <div className="w-75 aspect-[auto_calc(2/3)] bg-[rgba(0,0,0,.7)] absolute top-0 left-0 text-center rounded-lg invisible opacity-0 group-hover:visible group-hover:opacity-100 [transition:linear_.2s] [backdrop-filter:blur(20px)]">
-                <Link href="" className='text-white w-full aspect-[auto_calc(2/3)] inline-flex items-center justify-center text-[20.8px] font-normal underline'><span className="mr-1.5 relative top-0 left-0 inline-flex w-4 min-w-4 h-4 min-h-4 bg-center bg-no-repeat text-inherit items-center justify-center " style={{backgroundImage:`url("/expand.svg")`}}></span> Expand</Link>
-                </div>
-                </div>
                 </div>
 
                 <div className="w-full max-w-full min-h-0 flex ">
-                  <MobileDetail title={movieDetailDatas.title} year={movieDetailDatas.release_date.slice(0,4)} certification={certificationDatas} date={formattedDate} country={movieDetailDatas.origin_country} genres={movieDetailDatas.genres} runtime={formattedRuntime} rating={movieDetailDatas.vote_average} play={movieDetailDatas.homepage} tagline={movieDetailDatas.tagline} overview={movieDetailDatas.overview}/>
+                  <MobileDetail
+                    title={movieDetailDatas.title}
+                    year={movieDetailDatas.release_date.slice(0, 4)}
+                    certification={certificationDatas}
+                    date={formattedDate}
+                    country={movieDetailDatas.origin_country}
+                    genres={movieDetailDatas.genres}
+                    runtime={formattedRuntime}
+                    rating={movieDetailDatas.vote_average}
+                    play={movieDetailDatas.homepage}
+                    tagline={movieDetailDatas.tagline}
+                    overview={movieDetailDatas.overview}
+                  />
                 </div>
               </div>
             </section>
           </div>
         </div>
       </div>
-    </div>
-  )
-}
 
-export default Page
+      <div className="my-0 bg-white w-full flex justify-center min-w-full flex-wrap items-start content-start ">
+        <div className="flex items-start justify-center min-w-full ">
+          <div className="max-w-350 w-full py-7.5 px-10 flex items-start ">
+            <div>
+              <div className="bg-white w-[calc(100vw-80px-268px)] max-w-[calc(1400px-80px-268px)] flex flex-wrap pr-7.5 ">
+                <section className="border-t-[none] pt-0 w-full block py-7.5 ">
+                  <h3 className="font-semibold text-black text-[22.4px] mb-5 m-[0_0_4px] p-0 leading-none ">
+                    Top Bill Cast
+                  </h3>
+                  <div className="relative top-0 left-0 after:[transition:linear_.3s] after:opacity-90 after:content-[''] after:w-15 after:h-full after:absolute after:top-0 after:right-0 after:bg-[linear-gradient(to_right,rgba(255,255,255,0)0,#fff_100%)] after:will-change-[opacity] after:pointer-events-none ">
+                    <div className="overflow-y-hidden overflow-x-scroll custom-scroll -ml-2.5 -mt-2.5 pb-2.5 relative top-0 left-0 p-0 m-0 flex ">
+                      {castDatas.slice(0, 9).map((item) => (
+                        <CastBox
+                          key={item.id}
+                          id={item.id}
+                          profile={item.profile_path}
+                          name={item.name}
+                          character={item.character}
+                        />
+                      ))}
+                      <div className="mr-0 ml-2.5 bg-transparent flex items-center m-0 p-0 min-w-35 w-35 ">
+                        <p className="mb-0 px-2.5 flex items-center m-0 text-base overflow-hidden truncate">
+                          <Link
+                            href=""
+                            className="flex items-center m-0 p-0 text-black font-bold underline-offset-3 "
+                          >
+                            View More{" "}
+                            <span
+                              className="relative top-0 left-0 inline-flex min-w-[17.6px] w-[17.6px] min-h-[17.6px] h-[17.6px] leading-[inherit] bg-center bg-no-repeat text-inherit items-center justify-center "
+                              style={{
+                                backgroundImage: `url("/right-arrow.svg")`,
+                              }}
+                            ></span>
+                          </Link>
+                        </p>
+                      </div>
+                    </div>
+                    <div className=""></div>
+                  </div>
+                  <p className="mt-0 mb-0 m-[20px_0_0] inline-block text-base p-0 ">
+                    <Link
+                      href=""
+                      className="underline decoration-[color-mix(in_srgb,currentColor_40%,transparent)] underline-offset-3 text-black font-semibold text-[17.6px] "
+                    >
+                      Full Cast & Crew
+                    </Link>
+                  </p>
+                </section>
+
+                <section className="w-full block py-7.5 border-t border-t-solid border-t-[#d7d7d7] ">
+                  <section className="block ">
+                    <TitleMenu
+                      social={social}
+                      setSocial={setSocial}
+                      reviewTotal={reviewDatas?.total_results || 0}
+                      discussionTotal={1}
+                    />
+
+                    <div className="flex w-full rounded-lg ">
+                      <div className="w-full">
+                        <div className="flex flex-wrap items-center w-full ">
+                          <div className="w-full flex rounded-lg ">
+                            <div className="w-full ">
+                              <div className="w-full flex rounded-lg">
+                                <div className="w-full">
+                                  {social === "Reviews" && randomReview ? (
+                                    <ReviewBox
+                                      name={randomReview.author}
+                                      avatar={
+                                        randomReview.author_details.avatar_path
+                                      }
+                                      date={formattedReviewDate}
+                                      rating={
+                                        randomReview.author_details.rating
+                                      }
+                                      content={randomReview.content.slice(
+                                        0,
+                                        820,
+                                      )}
+                                    />
+                                  ) : null}
+
+                                  {social === "Discussions" ? (
+                                    <div className="flex w-full rounded-lg ">
+                                      <div className="w-full">
+                                        <div>
+                                          <p className="text-black text-base">
+                                            Want to be notified when someone
+                                            makes the first post?{" "}
+                                            <Link
+                                              href=""
+                                              className="underline decoration-[#666]"
+                                            >
+                                              Yes, notify me
+                                            </Link>
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ) : null}
+                                </div>
+                              </div>
+
+                              <p className="mb-0 font-base m-[20px_0_0] inline-block p-0">
+                                <Link
+                                  href=""
+                                  className="underline decoration-[color-mix(in_srgb,currentColor_40%,transparent)] underline-offset-3 text-black font-semibold text-[17.6px]"
+                                >
+                                  {social === "Reviews"
+                                    ? "Read All Reviews"
+                                    : "Go to Discussions"}
+                                </Link>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </section>
+
+                <section className="w-full block p-[30px_0] border-t border-t-solid border-t-[#d7d7d7] ">
+                  <MediaTitle
+                    media={media}
+                    setMedia={setMedia}
+                    videoTotal={videoDatas.length}
+                    backdropTotal={backDropDatas.length}
+                    posterTotal={posterDatas.length}
+                  />
+
+                  <div className="relative top-0 left-0 after:[transition:linear_.3s] after:opacity-90 after:content-[''] after:w-15 after:h-full after:absolute after:top-0 after:right-0 after:bg-[linear-gradient(to_right,rgba(255,255,255,0)0,#fff_100%)] after:will-change-[opacity] after:pointer-events-none">
+                    <div className="flex w-full rounded-lg h-75 overflow-x-scroll overflow-y-hidden no-scrollbar whitespace-nowrap [font-size:0] pb-2.5 ">
+                      <div className="flex w-full rounded-lg h-75 overflow-x-scroll overflow-y-hidden no-scrollbar  whitespace-nowrap [font-size:0] pb-2.5">
+                        {media === "Most Popular" &&
+                          videoDatas
+                            .slice(-3)
+                            .reverse()
+                            .map((item) => (
+                              <MediaBox
+                                key={item.id}
+                                poster={`https://img.youtube.com/vi/${item.key}/hqdefault.jpg`}
+                              />
+                            ))}
+
+                        {media === "Videos" &&
+                          videoDatas
+                            .slice(-5)
+                            .reverse()
+                            .map((item) => (
+                              <MediaBox
+                                key={item.id}
+                                poster={`https://img.youtube.com/vi/${item.key}/hqdefault.jpg`}
+                              />
+                            ))}
+
+                        {media === "Backdrops" &&
+                          backDropDatas
+                            .slice(0, 6)
+                            .map((item, index) => (
+                              <BackdropBox
+                                key={index}
+                                poster={`${TMDB_IMAGE_BASE}${size3}${item.file_path}`}
+                              />
+                            ))}
+
+                        {media === "Posters" &&
+                          posterDatas
+                            .slice(0, 10)
+                            .map((item, index) => (
+                              <PosterBox key={index} poster={item.file_path} />
+                            ))}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section className="pb-0 w-full block py-7.5 border-t border-solid border-t-[#d7d7d7]">
+                  <div>
+                    <h3 className="font-semibold text-[22.4px] mb-5 m-[0_0_4px] leading-none text-black">
+                      Recommendations
+                    </h3>
+                    <div className="relative top-0 left-0 ">
+                      <div className="overflow-y-hidden overflow-x-scroll whitespace-nowrap pb-2.5 custom-scroll">
+                        {recommendDatas.length > 0 ? (
+                          recommendDatas
+                            .slice(0, 19)
+                            .map((item) => (
+                              <RecommendBox
+                                key={item.id}
+                                id={item.id}
+                                name={item.title}
+                                poster={item.poster_path}
+                                date={item.release_date}
+                                rating={item.vote_average}
+                              />
+                            ))
+                        ) : (
+                          <p className="text-gray-500">
+                            No recommendations available
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Page;
