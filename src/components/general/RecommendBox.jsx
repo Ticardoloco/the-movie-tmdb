@@ -8,7 +8,7 @@ const RecommendBox = ({id, poster, date, name, rating}) => {
   return (
     <div className='inline-block w-62.5 m-[0_15_0_0]'>
       <div className="w-62.5 h-35.25 overflow-hidden bg-size-[30%] bg-[#dbdbdb] rounded-lg relative top-0 left-0 inline-flex min-w-4 min-h-4 bg-center bg-no-repeat text-inherit items-center justify-center " style={{backgroundImage:`url("/img-card-bg.svg")`}}>
-        <Link href="" className='font-normal text-base text-black w-full h-full block group '>
+        <Link href={id} className='font-normal text-base text-black w-full h-full block group '>
         <Image
         fill
         src={`${TMDB_IMAGE_BASE}${size}${poster}`}
@@ -31,7 +31,7 @@ const RecommendBox = ({id, poster, date, name, rating}) => {
         </Link>
       </div>
       <p className="text-black flex justify-between mb-0 p-0 w-full leading-[19.2px] m-0 text-base ">
-        <Link href='' className='font-normal text-base whitespace-nowrap overflow-hidden truncate inline-block pr-5 underline-offset-3 text-black'>
+        <Link href={id} className='font-normal text-base whitespace-nowrap overflow-hidden truncate inline-block pr-5 underline-offset-3 text-black decoration-[#666] hover:underline hover:opacity-60'>
         <span>{name}</span>
         </Link>
         <span className="mt-0 mr-0 inline-flex items-center ">{Math.round(rating*10)} <span>%</span></span>

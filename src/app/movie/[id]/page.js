@@ -480,7 +480,7 @@ const Page = () => {
                             .map((item) => (
                               <RecommendBox
                                 key={item.id}
-                                id={item.id}
+                                id={`/movie/${item.id}`}
                                 name={item.title}
                                 poster={item.poster_path}
                                 date={item.release_date}
