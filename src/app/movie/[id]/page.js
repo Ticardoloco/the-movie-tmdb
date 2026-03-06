@@ -1,7 +1,9 @@
 "use client";
 import BackdropBox from "@/components/general/BackdropBox";
 import CastBox from "@/components/general/CastBox";
+import ContentScore from "@/components/general/ContentScore";
 import DataDetail from "@/components/general/DataDetail";
+import KeyWord from "@/components/general/KeyWord";
 import MediaBox from "@/components/general/MediaBox";
 import MediaTitle from "@/components/general/MediaTitle";
 import MobileDetail from "@/components/general/MobileDetail";
@@ -36,6 +38,8 @@ const Page = () => {
   const [backDropDatas, setBackDropDatas] = useState([]);
   const [posterDatas, setPosterDatas] = useState([]);
   const [recommendDatas, setRecommendDatas] = useState([]);
+  const [keyWordDatas, setKeyWordDatas] = useState([]);
+  const [contentScore, setContentScore] = useState(0);
 
   const getMovieDetailData = async () => {
     try {
@@ -182,6 +186,39 @@ const Page = () => {
     }
   };
 
+  const getKeyWordData = async () => {
+    try {
+      const keyWordData = await api.get(
+        `${config.subUrl.details.movie_list}/${id}/keywords`,
+      );
+      if (keyWordData.status === 200) {
+        setKeyWordDatas(keyWordData.data.keywords);
+      }
+    } catch (error) {
+      console.error("Data couldn't fetch", error);
+    }
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const generateContentScore = () => {
+  let score = 0;
+
+  if (movieDetailDatas?.overview) score += 20;
+  if (movieDetailDatas?.poster_path) score += 15;
+  if (movieDetailDatas?.backdrop_path) score += 15;
+  if (movieDetailDatas?.genres?.length) score += 10;
+  if (movieDetailDatas?.runtime) score += 10;
+  if (movieDetailDatas?.vote_average) score += 10;
+
+  if (castDatas?.length > 0) score += 5;
+  if (videoDatas?.length > 0) score += 5;
+  if (posterDatas?.length > 0) score += 5;
+  if (backDropDatas?.length > 0) score += 3;
+  if (keyWordDatas?.length > 0) score += 2;
+
+  setContentScore(score);
+};
+
   useEffect(() => {
     getMovieDetailData();
     getCertificationData();
@@ -191,9 +228,14 @@ const Page = () => {
     getBackDropData();
     getPosterData();
     getRecommendData();
+    getKeyWordData()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+
+  useEffect(() => {
+  generateContentScore();
+}, [movieDetailDatas, castDatas, videoDatas, posterDatas, backDropDatas, keyWordDatas, generateContentScore]);
 
   if (!movieDetailDatas) {
     return <div>loading...</div>;
@@ -489,12 +531,23 @@ const Page = () => {
                             ))
                         ) : (
                           <p className="text-gray-500">
-                            No recommendations available
+                            We don&apos;t have enough data to suggest any movies based on Passage of Venus. You can help by rating movies you&apos;ve seen.
                           </p>
                         )}
                       </div>
                     </div>
                   </div>
+                </section>
+              </div>
+            </div>
+            
+            <div className="min-w-65 w-65 flex flex-wrap">
+              <div>
+                <section className="flex flex-wrap w-full max-w-75 ">
+                  <div className="w-full ">
+                    <KeyWord status={movieDetailDatas.status} budget={movieDetailDatas.budget} language={movieDetailDatas.original_language} revenue={movieDetailDatas.revenue} keyword={keyWordDatas}/>
+                  </div>
+                    <ContentScore score={contentScore}/>
                 </section>
               </div>
             </div>

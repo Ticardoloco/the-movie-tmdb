@@ -72,7 +72,7 @@ const DataDetail = ({poster, title, year, certification, date, country, genres, 
                   <div className="justify-center items-center flex mr-0!">
                     <div className="w-17 h-17 inline-block transition-transform duration-200 transform hover:scale-105 cursor-pointer">
                       <div className="inline-block w-17 h-17 rounded-full p-1 bg-[#081c22]">
-                        <div className={`relative rounded-full flex items-center justify-center w-15 h-15 text-center ${Math.round(rating*10) > 70 ?"bg-green-500":"bg-yellow-500"}`}>
+                        <div className={`relative rounded-full flex items-center justify-center w-15 h-15 text-center ${Math.round(rating*10)>=70?"bg-green-400":Math.round(rating*10)>=40? "bg-yellow-400":"bg-red-500"}`}>
                           <div className="w-13 h-13 relative rounded-full flex bg-[#081c22] items-center justify-center ">
                             <span className="text-white [speak:none] not-italic [font-variant:normal] font-semibold leading-none [-webkit-font-smoothing:antialiased] after:content-['*'] ">{Math.round(rating*10)}</span>
                           </div>

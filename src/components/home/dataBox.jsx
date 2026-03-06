@@ -34,7 +34,7 @@ const DataBox = ({id, title, poster, rating, date}) => {
           </div>
       </div>
       <div className="pb-0 w-full p-[26px_10px_12px] relative whitespace-normal flex content-start flex-wrap">
-        <div className={`absolute -top-4.75 left-2.5 w-9.5 h-9.5 flex justify-center items-center rounded-[50%] transform scale-100 transition-transform duration-200 ${Math.round(rating*10)>=70?"bg-green-400":"bg-yellow-400"}`}>
+        <div className={`absolute -top-4.75 left-2.5 w-9.5 h-9.5 flex justify-center items-center rounded-[50%] transform scale-100 transition-transform duration-200 ${Math.round(rating*10)>=70?"bg-green-400":Math.round(rating*10)>=40? "bg-yellow-400":"bg-red-500"}`}>
           <div className="mr-0 w-8.5 h-8.5 p-0.5 inline-block rounded-[50%] bg-[#081c22]">
             <div className="relative inline-block w-full h-full text-center">
               <div className="w-full h-full flex items-center justify-center">
