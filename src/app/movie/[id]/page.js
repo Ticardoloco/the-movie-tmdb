@@ -80,17 +80,17 @@ const Page = () => {
 
   const formattedDate = movieDetailDatas?.release_date
     ? (() => {
-        const [year, month, day] = movieDetailDatas.release_date.split("-");
-        return `${month}-${day}-${year}`;
-      })()
+      const [year, month, day] = movieDetailDatas.release_date.split("-");
+      return `${month}-${day}-${year}`;
+    })()
     : null;
 
   const formattedRuntime = movieDetailDatas?.runtime
     ? (() => {
-        const hours = Math.floor(movieDetailDatas.runtime / 60);
-        const minutes = movieDetailDatas.runtime % 60;
-        return `${hours}h ${minutes}m`;
-      })()
+      const hours = Math.floor(movieDetailDatas.runtime / 60);
+      const minutes = movieDetailDatas.runtime % 60;
+      return `${hours}h ${minutes}m`;
+    })()
     : null;
 
   const getCastData = async () => {
@@ -128,10 +128,10 @@ const Page = () => {
 
   const formattedReviewDate = randomReview?.created_at
     ? new Date(randomReview.created_at).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
     : null;
 
   const getVideoData = async () => {
@@ -201,23 +201,23 @@ const Page = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const generateContentScore = () => {
-  let score = 0;
+    let score = 0;
 
-  if (movieDetailDatas?.overview) score += 20;
-  if (movieDetailDatas?.poster_path) score += 15;
-  if (movieDetailDatas?.backdrop_path) score += 15;
-  if (movieDetailDatas?.genres?.length) score += 10;
-  if (movieDetailDatas?.runtime) score += 10;
-  if (movieDetailDatas?.vote_average) score += 10;
+    if (movieDetailDatas?.overview) score += 20;
+    if (movieDetailDatas?.poster_path) score += 15;
+    if (movieDetailDatas?.backdrop_path) score += 15;
+    if (movieDetailDatas?.genres?.length) score += 10;
+    if (movieDetailDatas?.runtime) score += 10;
+    if (movieDetailDatas?.vote_average) score += 10;
 
-  if (castDatas?.length > 0) score += 5;
-  if (videoDatas?.length > 0) score += 5;
-  if (posterDatas?.length > 0) score += 5;
-  if (backDropDatas?.length > 0) score += 3;
-  if (keyWordDatas?.length > 0) score += 2;
+    if (castDatas?.length > 0) score += 5;
+    if (videoDatas?.length > 0) score += 5;
+    if (posterDatas?.length > 0) score += 5;
+    if (backDropDatas?.length > 0) score += 3;
+    if (keyWordDatas?.length > 0) score += 2;
 
-  setContentScore(score);
-};
+    setContentScore(score);
+  };
 
   useEffect(() => {
     getMovieDetailData();
@@ -234,15 +234,15 @@ const Page = () => {
   }, [id]);
 
   useEffect(() => {
-  generateContentScore();
-}, [movieDetailDatas, castDatas, videoDatas, posterDatas, backDropDatas, keyWordDatas, generateContentScore]);
+    generateContentScore();
+  }, [movieDetailDatas, castDatas, videoDatas, posterDatas, backDropDatas, keyWordDatas, generateContentScore]);
 
   if (!movieDetailDatas) {
     return <div>loading...</div>;
   }
 
   return (
-    <div className="w-full flex justify-center flex-wrap items-start bg-cover bg-no-repeat bg-position-[50%_50%] ">
+    <div className="w-full flex justify-center flex-wrap items-start bg-cover bg-no-repeat bg-position-[50%_50%] overflow-hidden">
       <ShortcutBar />
       <div
         className="hidden lg:block mt-27.5 border-b border-solid border-[rgb(220.5,220.5,220.5)] bg-position-[left_calc((50vw-170px)-340px)_top] bg-cover w-full relative z-1 bg-[linear-gradient(to_bottom_right,rgba(221,221,221,1),rgba(221,221,221,0.84))] border"
@@ -334,16 +334,38 @@ const Page = () => {
       </div>
 
       <div className="my-0 bg-white w-full flex justify-center min-w-full flex-wrap items-start content-start ">
-        <div className="flex items-start justify-center min-w-full ">
-          <div className="max-w-350 w-full py-7.5 px-10 flex items-start ">
+        <div className="flex flex-wrap lg:flex-nowrap max-w-full lg:max-w-none items-start justify-center content-start lg:content-none min-w-full ">
+          <div className="flex-wrap lg:flex-nowrap max-w-screen p-0  lg:max-w-350 w-full lg:py-7.5 lg:px-10 flex items-start content-start lg:content-none">
             <div>
-              <div className="bg-white w-[calc(100vw-80px-268px)] max-w-[calc(1400px-80px-268px)] flex flex-wrap pr-7.5 ">
-                <section className="border-t-[none] pt-0 w-full block py-7.5 ">
-                  <h3 className="font-semibold text-black text-[22.4px] mb-5 m-[0_0_4px] p-0 leading-none ">
+              <div className="bg-white w-full lg:w-[calc(100vw-80px-268px)] max-w-screen lg:max-w-[calc(1400px-80px-268px)] h-auto min-h-0 justify-start lg:justify-normal p-0 flex flex-wrap lg:pr-7.5 ">
+
+                <section className="border-t-none pt-0 w-screen p-5 block lg:hidden">
+                  <div className="mb-0 mt-5 w-full min-h-12.5! ">
+                    <span >
+                      <div className="pt-0">
+                        <div className="cursor-pointer max-w-[320px]! min-w-75! w-full! h-12.5! bg-[#f0f0f0]! flex! justify-between! border! border-solid! border-transparent! rounded-[5px]! m-[0_auto]! p-0! ">
+                          <div className="flex! items-center! pl-2.5! ">
+                            <button className="w-auto h-auto! cursor-pointer bg-[#57afd5] text-white text-sm! font-bold! border-none! py-1.25! px-2.5! rounded-[5px]! flex! items-center! shadow-[0px_3px_6px_rgba(0,0,0,0.3)] [-webkit-appearance:button] overflow-visible bg-none ">
+                              <svg className="heart-beat" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style={{ width: "20px", height: "20px", marginRight: "10px" }}>        <path d="M6 4l15 8-15 8z" fill="#ffffff"></path>      </svg>
+                              Watch Now
+                            </button>
+                          </div>
+                          <div className="flex! flex-col! justify-center! items-end! pr-2.5!">
+                            <div className="leading-[16.8px]! text-black! text-sm! font-normal! p-0! ">Severance</div>
+                            <div className="leading-[14.4px]! text-black! text-[12px] font-extralight! p-0!">on Apple TV</div>
+                          </div>
+                        </div>
+                      </div>
+                    </span>
+                  </div>
+                </section>
+
+                <section className="border-t border-solid border-t-[#d7d7d7] lg:border-t-[none]  w-screen lg:w-full block p-[20px_0] lg:p-[30px_0] ">
+                  <h3 className="font-semibold text-black text-[19.2px] lg:text-[22.4px] mb-5 m-[0_0_4px] p-[0_20px] lg:p-0 leading-none ">
                     Top Bill Cast
                   </h3>
                   <div className="relative top-0 left-0 after:[transition:linear_.3s] after:opacity-90 after:content-[''] after:w-15 after:h-full after:absolute after:top-0 after:right-0 after:bg-[linear-gradient(to_right,rgba(255,255,255,0)0,#fff_100%)] after:will-change-[opacity] after:pointer-events-none ">
-                    <div className="overflow-y-hidden overflow-x-scroll custom-scroll -ml-2.5 -mt-2.5 pb-2.5 relative top-0 left-0 p-0 m-0 flex ">
+                    <div className="w-[calc(100vw+10px)] lg:w-full overflow-y-hidden overflow-x-scroll custom-scroll whitespace-nowrap lg:whitespace-normal -ml-2.5 -mt-2.5 pb-0 lg:pb-2.5 relative top-0 left-0 p-0 m-0 flex ">
                       {castDatas.slice(0, 9).map((item) => (
                         <CastBox
                           key={item.id}
@@ -372,7 +394,7 @@ const Page = () => {
                     </div>
                     <div className=""></div>
                   </div>
-                  <p className="mt-0 mb-0 m-[20px_0_0] inline-block text-base p-0 ">
+                  <p className="mt-0 mb-0 m-[20px_0_0] inline-block text-base p-[0_20px] lg:p-0 ">
                     <Link
                       href=""
                       className="underline decoration-[color-mix(in_srgb,currentColor_40%,transparent)] underline-offset-3 text-black font-semibold text-[17.6px] "
@@ -382,7 +404,7 @@ const Page = () => {
                   </p>
                 </section>
 
-                <section className="w-full block py-7.5 border-t border-t-solid border-t-[#d7d7d7] ">
+                <section className="w-screen lg:w-full p-5 lg:p-0 block lg:py-7.5 border-t border-t-solid border-t-[#d7d7d7] ">
                   <section className="block ">
                     <TitleMenu
                       social={social}
@@ -391,10 +413,10 @@ const Page = () => {
                       discussionTotal={1}
                     />
 
-                    <div className="flex w-full rounded-lg ">
+                    <div className="h-auto flex w-full rounded-none lg:rounded-lg ">
                       <div className="w-full">
                         <div className="flex flex-wrap items-center w-full ">
-                          <div className="w-full flex rounded-lg ">
+                          <div className="w-full h-auto flex rounded-none lg:rounded-lg ">
                             <div className="w-full ">
                               <div className="w-full flex rounded-lg">
                                 <div className="w-full">
@@ -454,7 +476,7 @@ const Page = () => {
                   </section>
                 </section>
 
-                <section className="w-full block p-[30px_0] border-t border-t-solid border-t-[#d7d7d7] ">
+                <section className="w-screen lg:w-full block p-[20px_0] lg:p-[30px_0] border-t border-t-solid border-t-[#d7d7d7] ">
                   <MediaTitle
                     media={media}
                     setMedia={setMedia}
@@ -463,9 +485,9 @@ const Page = () => {
                     posterTotal={posterDatas.length}
                   />
 
-                  <div className="relative top-0 left-0 after:[transition:linear_.3s] after:opacity-90 after:content-[''] after:w-15 after:h-full after:absolute after:top-0 after:right-0 after:bg-[linear-gradient(to_right,rgba(255,255,255,0)0,#fff_100%)] after:will-change-[opacity] after:pointer-events-none">
-                    <div className="flex w-full rounded-lg h-75 overflow-x-scroll overflow-y-hidden no-scrollbar whitespace-nowrap [font-size:0] pb-2.5 ">
-                      <div className="flex w-full rounded-lg h-75 overflow-x-scroll overflow-y-hidden no-scrollbar  whitespace-nowrap [font-size:0] pb-2.5">
+                  <div className="relative top-0 left-0 lg:after:[transition:linear_.3s] lg:after:opacity-90 lg:after:content-[''] lg:after:w-15 lg:after:h-full lg:after:absolute lg:after:top-0 lg:after:right-0 lg:after:bg-[linear-gradient(to_right,rgba(255,255,255,0)0,#fff_100%)] lg:after:will-change-[opacity] lg:after:pointer-events-none">
+                    <div className="flex w-full rounded-none lg:rounded-lg h-35.25 lg:h-75 overflow-x-scroll overflow-y-hidden no-scrollbar whitespace-nowrap [font-size:0] pb-2.5 ">
+                      <div className="flex w-full rounded-none lg:rounded-lg h-35.25 lg:h-75 overflow-x-scroll overflow-y-hidden no-scrollbar whitespace-nowrap [font-size:0] pb-2.5 ">
                         {media === "Most Popular" &&
                           videoDatas
                             .slice(-3)
@@ -509,13 +531,13 @@ const Page = () => {
                   </div>
                 </section>
 
-                <section className="pb-0 w-full block py-7.5 border-t border-solid border-t-[#d7d7d7]">
+                <section className="pb-0 w-screen p-[0_20px] lg:p-0 lg:w-full block py-5 lg:py-7.5 border-t border-solid border-t-[#d7d7d7]">
                   <div>
-                    <h3 className="font-semibold text-[22.4px] mb-5 m-[0_0_4px] leading-none text-black">
+                    <h3 className="font-semibold text-[19.2px] lg:text-[22.4px] mb-5 m-[0_0_4px] leading-none text-black">
                       Recommendations
                     </h3>
                     <div className="relative top-0 left-0 ">
-                      <div className="overflow-y-hidden overflow-x-scroll whitespace-nowrap pb-2.5 custom-scroll">
+                      <div className="overflow-y-hidden overflow-x-scroll w-screen lg:w-full pr-5 lg:px-0 whitespace-nowrap pb-2.5 custom-scroll">
                         {recommendDatas.length > 0 ? (
                           recommendDatas
                             .slice(0, 19)
@@ -530,7 +552,7 @@ const Page = () => {
                               />
                             ))
                         ) : (
-                          <p className="text-gray-500">
+                          <p className="-ml-5 text-gray-500 whitespace-break-spaces">
                             We don&apos;t have enough data to suggest any movies based on Passage of Venus. You can help by rating movies you&apos;ve seen.
                           </p>
                         )}
@@ -540,14 +562,36 @@ const Page = () => {
                 </section>
               </div>
             </div>
-            
-            <div className="min-w-65 w-65 flex flex-wrap">
+
+            <div className="max-w-screen lg:max-w-none w-full min-w-65 lg:min-w-65 lg:w-65 h-auto min-h-0 lg:min-h-auto justify-start lg:justify-normal  flex flex-wrap">
               <div>
-                <section className="flex flex-wrap w-full max-w-75 ">
+                <section className="flex flex-wrap w-full max-w-full lg:max-w-75 ">
                   <div className="w-full ">
-                    <KeyWord status={movieDetailDatas.status} budget={movieDetailDatas.budget} language={movieDetailDatas.original_language} revenue={movieDetailDatas.revenue} keyword={keyWordDatas}/>
+                    <KeyWord status={movieDetailDatas.status} budget={movieDetailDatas.budget} language={movieDetailDatas.original_language} revenue={movieDetailDatas.revenue} keyword={keyWordDatas} />
                   </div>
-                    <ContentScore score={contentScore}/>
+                  <ContentScore score={contentScore} />
+                  <div className="w-full">
+                    <p className="mb-0 border-[rgba(220.5,220.5,220.5,1)] bg-[rgba(220.5,220.5,220.5,1)] text-black rounded-[20px] p-[6px_20px] ml-5 lg:ml-0 text-[14.4px] inline-flex items-center mt-7.5 m-[20px_0_0] border-2 border-solid [transition:linear_.1s] ">
+                      <Link href="" className="text-black w-full font-bold uppercase [text-decoration:none] inline-flex items-center underline-offset-3 text-[15.84px]">
+                        <span className="mr-1.5 relative top-0 left-0 inline-flex min-w-[15.84px] w-[15.84px] min-h-[15.84px] h-[15.84px] leading-[inherit] bg-center bg-no-repeat text-inherit justify-center items-center" style={{ backgroundImage: `url('/lock.svg')` }}></span>
+                        Login to edit
+                      </Link>
+                    </p>
+                  </div>
+                  <div className="w-full mt-7.5 hidden lg:block">
+                    <p className="mb-0 m-0 p-0 text-base ">
+                      <Link href="" className="underline decoration-[color-mix(in_srgb,currentColor_40%,transparent)] underline-offset-3 inline-flex items-center m-0 opacity-50 text-black">
+                        <span className="mr-1 text-[22.4px] relative top-0 left-0 inline-flex min-w-[22.4px] w-[22.4px] min-h-[22.4px] h-[22.4px] leading-[inherit] bg-center bg-no-repeat text-inherit justify-center items-center" style={{ backgroundImage: `url('/keyboard.svg')` }}></span>
+                        keyboard Shortcuts
+                      </Link>
+                    </p>
+                  </div>
+                  <div className="w-full mt-5 flex items-center mb-5 lg:mb-0">
+                    <p className="mb-0 m-0 flex items-center text-base ml-5 lg:ml-0  p-0 text-black">
+                      <span className="mr-1 text-[22.4px] relative top-0 left-0 inline-flex min-w-[22.4px] w-[22.4px] min-h-[22.4px] h-[22.4px] leading-[inherit] bg-center bg-no-repeat text-inherit justify-center items-center" style={{ backgroundImage: `url('/alert.svg')` }}></span>
+                      Login to report an issue
+                    </p>
+                  </div>
                 </section>
               </div>
             </div>

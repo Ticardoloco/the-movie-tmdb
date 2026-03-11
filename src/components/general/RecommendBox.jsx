@@ -6,14 +6,14 @@ const RecommendBox = ({id, poster, date, name, rating}) => {
     const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
     const size = "/w500_and_h282_face";
   return (
-    <div className='inline-block w-62.5 m-[0_15_0_0]'>
-      <div className="w-62.5 h-35.25 overflow-hidden bg-size-[30%] bg-[#dbdbdb] rounded-lg relative top-0 left-0 inline-flex min-w-4 min-h-4 bg-center bg-no-repeat text-inherit items-center justify-center " style={{backgroundImage:`url("/img-card-bg.svg")`}}>
+    <div className='inline-block w-62.5 m-[0_15px_0_0]'>
+      <div className="w-62.5 h-35.25 overflow-hidden bg-size-[30%] bg-[#dbdbdb] rounded-md lg:rounded-lg relative top-0 left-0 inline-flex min-w-4 min-h-4 bg-center bg-no-repeat text-inherit items-center justify-center " style={{backgroundImage:`url("/img-card-bg.svg")`}}>
         <Link href={id} className='font-normal text-base text-black w-full h-full block group '>
         <Image
         fill
         src={`${TMDB_IMAGE_BASE}${size}${poster}`}
         alt='recommendation'
-        className='top-0 left-0 w-62.5 h-35.25 rounded-lg relative outline-0 border-0 max-w-[inherit] block align-middle group'
+        className='top-0 left-0 w-62.5 h-35.25 rounded-md lg:rounded-lg relative outline-0 border-0 max-w-[inherit] block align-middle group'
         />
         <div className="invisible bg-[rgba(255,255,255,.9)] absolute bottom-0 left-0 h-10 w-full z-1 px-2.5 flex items-center justify-between group-hover:visible duration-200  transition ">
             <span className="text-base inline-flex items-center ">

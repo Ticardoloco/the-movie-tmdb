@@ -4,8 +4,8 @@ import React from "react";
 const KeyWord = ({id, status, language, budget, revenue, keyword}) => {
   return (
     <div className="w-full pb-0! mb-0!">
-      <section className="mb-7.5 w-full block ">
-        <div className="min-h-12.5 mb-7.5 w-full ">
+      <section className="mb-7.5 w-full block p-[0_20px] lg:p-0 ">
+        <div className="hidden lg:block min-h-12.5 mb-7.5 w-full ">
           <span >
             <div className="pt-0">
               <div className="cursor-pointer max-w-[320px]! min-w-72.5! w-full! h-12.5! bg-[#f0f0f0]! flex! justify-between! border-none! rounded-[5px]! m-0! p-0! ">
@@ -24,7 +24,7 @@ const KeyWord = ({id, status, language, budget, revenue, keyword}) => {
           </span>
         </div>
 
-        <div className="flex ">
+        <div className="flex mt-7.5 lg:mt-0">
         <div className="h-7.5 mb-7.5 ">
         <Link href="" className="block text-[30.4px] text-black font-normal ">
         <span className="relative top-0 left-0 inline-flex min-w-[30.4px] w-[30.4px] min-h-[30.4px] h-[30.4px] leading-[inherit] bg-center bg-no-repeat text-inherit justify-center items-center " style={{backgroundImage:`url("/facebook.svg")`}}></span>
@@ -64,12 +64,12 @@ const KeyWord = ({id, status, language, budget, revenue, keyword}) => {
         </p>
 
       </section>
-      <section className="border-b border-solid border-[#d7d7d7] text-black mb-7.5 w-full mt-7.5 block ">
+      <section className="border-b border-solid border-[#d7d7d7] text-black mb-7.5 w-full p-[0_20px] mt-7.5 block ">
         <h4 className="text-[17.6px] font-semibold mb-2.5 mt-0 p-0 m-0 leading-none "><span>Keywords</span></h4>
         <ul className="pb-7.5 w-full flex flex-wrap justify-start m-0 p-0 ">
           {keyword.length > 0 ? (keyword?.map(item=>(
-            <li key={item.id} className="mr-1.25 mb-2.5 leading-[24px] text-[14.4px] whitespace-nowrap ">
-              <Link href="" className="bg-[rgba(0,0,0,.1)] border border-solid border-[#d7d7d7] text-black p-[4px_10px] rounded-[4px] text-[12.96px] [transition:linear_.1s] font-normal ">{item.name}</Link>
+            <li key={item.id} className="mr-1.25 mb-2.5 leading-6 text-[14.4px] whitespace-nowrap ">
+              <Link href="" className="bg-[rgba(0,0,0,.1)] border border-solid border-[#d7d7d7] text-black p-[4px_10px] rounded-sm text-[12.96px] [transition:linear_.1s] font-normal ">{item.name}</Link>
             </li>)
           )): (<p className="text-black">No keywords have been added.</p>)}
         </ul>
