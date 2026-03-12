@@ -6,9 +6,9 @@ const SeasonBox = ({ id, poster, season, rating, year, episode, overview, name, 
   const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
   const size = "/w130_and_h195_face";
   return (
-    <div className="p-[0_20px] lg:p-0 border border-solid border-[rgba(227,227,227,1)] rounded-lg overflow-hidden flex flex-wrap shadow-[0_2px_8px_rgba(0,0,0,0.1)] bg-white text-black">
+    <div className="m-[0_20px] lg:m-0 border border-solid border-[rgba(227,227,227,1)] rounded-lg overflow-hidden flex flex-wrap shadow-[0_2px_8px_rgba(0,0,0,0.1)] bg-white text-black">
       <div className="flex">
-        <div className="border-r border-solid border-r-[rgba(227,227,227,1)] ">
+        <div className="hidden lg:block border-r border-solid border-r-[rgba(227,227,227,1)] ">
           <Link
             href=""
             className="block w-32.5 min-w-32.5 h-48.75 text-black font-normal"

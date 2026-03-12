@@ -11,7 +11,7 @@ const DataBox = ({id, title, poster, rating, date}) => {
             backgroundImage: `url('/img-card-bg.svg')`
     ,
           }}>
-            <Link className='inline-block w-full h-full text-black bg-position-[0_0] font-normal ' href={''}>
+            <Link className='inline-block w-full h-full text-black bg-position-[0_0] font-normal ' href={id}>
                 <Image
                 fill
                 src={`${TMDB_IMAGE_BASE}/w220_and_h330_face${poster}`}

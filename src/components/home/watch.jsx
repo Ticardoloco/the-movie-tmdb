@@ -40,12 +40,12 @@ const Watch = () => {
                 <div className="relative top-0 left-0 flex justify-center w-full min-w-full flex-wrap items-start content-start">
                     <div className="min-h-0 h-auto w-full min-w-full max-w-screen overflow-x-scroll custom-scroll overflow-y-hidden transition-[height] duration-500 ease-linear flex justify-start gap-5 items-start py-5 lg:px-10 px-5 whitespace-nowrap">
                         {slideWatch === "Movies" && watchMovieDatas.map((item)=>(
-                            <DataBox key={item.id} id={item.id} title={item.name} rating={item.vote_average} date={item.first_air_date} poster={item.poster_path}/>
+                            <DataBox key={item.id} id={`/tv/${item.id}`} title={item.name} rating={item.vote_average} date={item.first_air_date} poster={item.poster_path}/>
                         ))}
 
                         
                         {slideWatch === "TV" && watchTvDatas.map((item)=>(
-                            <DataBox key={item.id} id={item.id} title={item.name} rating={item.vote_average} date={item.first_air_date} poster={item.poster_path}/>
+                            <DataBox key={item.id} id={`/tv/${item.id}`} title={item.name} rating={item.vote_average} date={item.first_air_date} poster={item.poster_path}/>
                         ))}
 
 
