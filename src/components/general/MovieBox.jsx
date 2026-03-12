@@ -21,7 +21,7 @@ const MovieBox = ({id, title, poster, rating, date, description}) => {
           </div>
 
           <div className="hidden lg:block absolute top-2 right-2 z-4 opacity-60">
-            <Link className='text-black bg-position-[0_0] font-normal' href="/">
+            <Link className='text-black bg-position-[0_0] font-normal' href=''>
                 <div className="text-[25.6px] relative top-0 left-0">
                     <Image
                     width={26}
@@ -46,7 +46,7 @@ const MovieBox = ({id, title, poster, rating, date, description}) => {
         </div>
 
         <h2 className="hidden lg:block text-base leading-normal m-0 w-full wrap-break-word font-semibold p-0 ">
-          <Link href="/" className='font-bold text-black text-base leading-normal wrap-break-word hover:underline decoration-[#0177d2] hover:text-[#0177d2]'>{title}</Link>
+          <Link href={id} className='font-bold text-black text-base leading-normal wrap-break-word hover:underline decoration-[#0177d2] hover:text-[#0177d2]'>{title}</Link>
         </h2>
         <p className="hidden lg:block text-base m-0 p-0 text-[rgba(0,0,0,.6)] ">{date}</p>
 
