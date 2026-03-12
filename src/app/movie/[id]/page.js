@@ -245,12 +245,14 @@ const Page = () => {
     <div className="w-full flex justify-center flex-wrap items-start bg-cover bg-no-repeat bg-position-[50%_50%] overflow-hidden">
       <ShortcutBar />
       <div
-        className="hidden lg:block mt-27.5 border-b border-solid border-[rgb(220.5,220.5,220.5)] bg-position-[left_calc((50vw-170px)-340px)_top] bg-cover w-full relative z-1 bg-[linear-gradient(to_bottom_right,rgba(221,221,221,1),rgba(221,221,221,0.84))] border"
+        className="hidden lg:block mt-27.5 border-b border-solid border-[rgb(220.5,220.5,220.5)] bg-no-repeat bg-center bg-cover w-full relative z-1 border"
         style={{
-          backgroundImage: `url(${TMDB_IMAGE_BASE}${size}${movieDetailDatas?.backdrop_path})`,
+          backgroundImage: `
+          linear-gradient(to bottom right, rgba(221,221,221,0.4), rgba(221,221,221,0.4)),
+          url(${TMDB_IMAGE_BASE}${size}${movieDetailDatas?.backdrop_path})`,
         }}
       >
-        <div className="bg-[rgba(0,0,0,0.7)] flex justify-center flex-wrap ">
+        <div className="bg-[rgba(0,0,0,0.7)] flex justify-center flex-wrap">
           <div className="py-7.5 px-10 max-w-350 w-full z-0 ">
             <DataDetail
               poster={movieDetailDatas.poster_path}
