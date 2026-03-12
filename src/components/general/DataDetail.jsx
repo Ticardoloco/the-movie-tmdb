@@ -37,7 +37,7 @@ const DataDetail = ({poster, title, year, certification, date, country, genres, 
             </h2>
             <div className="flex mt-1 ">
               <span className="inline-flex whitespace-nowrap items-center p-[2.4px_4px_2.4px]! border solid border-white leading-none rounded-xs mr-1.75 ">{certification}</span>
-              <span className="pl-0 relative top-0 left-0 before:content-[''] before:text-[17.6px] before:leading-none before:w-full before:h-full before:absolute  before:top-0 before:left-1.75 before:inline-flex before:items-center before:-z-1 ">{date} ({country})</span>
+              {date &&(<span className="pl-0 relative top-0 left-0 before:content-[''] before:text-[17.6px] before:leading-none before:w-full before:h-full before:absolute  before:top-0 before:left-1.75 before:inline-flex before:items-center before:-z-1 ">{date} ({country})</span>)}
               <span className="pl-2 relative top-0 left-0  before:content-[''] before:text-[17.6px] before:leading-none before:w-full before:h-full before:absolute  before:top-0 before:left-1.75 before:inline-flex before:items-center before:-z-1">•
                 {genres.map((item, index)=>{
                   const isLast = index === genres.length - 1;

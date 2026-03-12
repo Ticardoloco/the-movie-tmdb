@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const CastBox = ({id, profile, name, character}) => {
+const CastBox = ({id, profile, name, character, episode}) => {
     const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
     const size = "/w138_and_h175_face";
   return (
@@ -21,6 +21,7 @@ const CastBox = ({id, profile, name, character}) => {
         <Link href='' className='text-black font-semibold underline-offset-3'>{name}</Link>
       </p>
       <p className="mb-0 px-2.5 text-[14.4px] text-black m-0 overflow-visible lg:overflow-hidden whitespace-normal text-clip [word-wrap:break-word] lg:truncate ">{character}</p>
+      {episode && (<p className="p-[0_10px] text-[14.4px] text-[rgba(0,0,0,.5)] overflow-hidden truncate">{episode} Episodes</p>)}
     </div>
   )
 }

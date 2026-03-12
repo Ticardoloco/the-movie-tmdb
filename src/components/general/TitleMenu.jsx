@@ -3,7 +3,7 @@ import React from 'react'
 
 const TitleMenu = ({social, setSocial, reviewTotal, discussionTotal}) => {
   return (
-   <div className="w-full">
+   <div className="w-full mb-2.5">
      <div className='hidden  w-full lg:flex items-baseline '>
       <h3 className="inline-block mr-12.5 text-black font-semibold text-[22.4px] mb-1.25 m-[0_0_4px] leading-none ">Social</h3>
       <ul className="w-full text-black">

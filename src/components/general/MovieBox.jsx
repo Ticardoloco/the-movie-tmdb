@@ -53,7 +53,7 @@ const MovieBox = ({id, title, poster, rating, date, description}) => {
         <div className="lg:hidden flex w-full items-start">
           <div className="flex-wrap w-full items-baseline overflow-hidden">
             <div className="leading-[100%]">
-              <Link href="/" className='whitespace-nowrap overflow-hidden truncate text-black font-normal'>
+              <Link href={id} className='whitespace-nowrap overflow-hidden truncate text-black font-normal'>
               <h2 className="block text-base m-0 whitespace-normal overflow-visible text-clip leading-normal w-full">{title}</h2>
               </Link>
             </div>

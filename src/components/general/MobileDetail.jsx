@@ -109,9 +109,9 @@ const MobileDetail = ({
           <span className="p-[0.96px_4px]! inline-flex whitespace-nowrap items-center border border-solid border-[rgba(0,0,0,.6)] text-[rgba(0,0,0,.6)] leading-none rounded-xs mr-1.75 ">
             {certification}
           </span>
-          <span className="pl-0 relative left-0 top-0 before:content-[''] before:text-[17.6px] before:leading-none before:w-full before:h-full before:absolute before:top-0 text-black opacity-95 before:left-1.75 before:inline-flex before:items-center before:z-1 ">
+          {date && (<span className="pl-0 relative left-0 top-0 before:content-[''] before:text-[17.6px] before:leading-none before:w-full before:h-full before:absolute before:top-0 text-black opacity-95 before:left-1.75 before:inline-flex before:items-center before:z-1 ">
             {date} ({country})
-          </span>
+          </span>)}
           <span className="w-full order-4 pl-0 relative top-0 left-0  before:content-[''] before:text-[17.6px] before:leading-none before:w-full before:h-full before:absolute before:top-0 text-black opacity-95 before:left-1.75 before:inline-flex before:items-center before:z-1">
             {genres.map((item, index) => {
               const isLast = index === genres.length - 1;

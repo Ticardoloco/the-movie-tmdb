@@ -66,6 +66,7 @@ const config = {
 
     details: {
       movie_list: "/movie",
+      tv_series: "/tv"
     }
 
     

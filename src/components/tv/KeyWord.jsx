@@ -1,9 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const KeyWord = ({id, status, language, budget, revenue, keyword}) => {
+const KeyWord = ({id, status, language, type,  keyword, network}) => {
+    const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
+    const size = "/h30";
   return (
-    <div className="w-full pb-0! mb-0!">
+    <div className="w-full pb-0! mb-0! text-black">
       <section className="mb-7.5 w-full block p-[0_20px] lg:p-0 ">
         <div className="hidden lg:block min-h-12.5 mb-7.5 w-full ">
           <span >
@@ -33,6 +36,12 @@ const KeyWord = ({id, status, language, budget, revenue, keyword}) => {
 
         <div className="ml-2.5 h-7.5 mb-7.5 ">
         <Link href="" className="block text-[30.4px] text-black font-normal ">
+        <span className="relative top-0 left-0 inline-flex min-w-[30.4px] w-[30.4px] min-h-[30.4px] h-[30.4px] leading-[inherit] bg-center bg-no-repeat text-inherit justify-center items-center " style={{backgroundImage:`url("/twitter.svg")`}}></span>
+        </Link>
+        </div>
+
+        <div className="ml-2.5 h-7.5 mb-7.5 ">
+        <Link href="" className="block text-[30.4px] text-black font-normal ">
         <span className="relative top-0 left-0 inline-flex min-w-[30.4px] w-[30.4px] min-h-[30.4px] h-[30.4px] leading-[inherit] bg-center bg-no-repeat text-inherit justify-center items-center " style={{backgroundImage:`url("/instagram.svg")`}}></span>
         </Link>
         </div>
@@ -43,9 +52,36 @@ const KeyWord = ({id, status, language, budget, revenue, keyword}) => {
         </Link>
         </div>
         </div>
+
+        <h4 className="text-[17.6px] font-semibold mb-2.5 mt-0 p-0 m-0 leading-none">
+            <span>Facts</span>
+        </h4>
         <p className="m-[0_0_20px] text-base p-0 text-black ">
           <strong className="font-semibold block"><span>Status</span></strong>
           {status}
+        </p>
+
+        <p className="m-[0_0_20px] text-base pb-0! mb-0! p-0 text-black ">
+          <strong className="font-semibold block"><span>Network</span></strong>
+        </p>
+
+        <ul className="mb-5 m-0 p-0">
+            <li className="flex m-0 text-[19.2px] items-center w-full ">
+                <Link href="" className="block font-semibold text-black">
+                <Image
+                width={50}
+                height={50}
+                src={`${TMDB_IMAGE_BASE}${size}${network}`}
+                alt="network"
+                className="block align-baseline p-0 m-0 w-full max-w-65 max-h-7.5 outline-0 border-0"
+                />
+                </Link>
+            </li>
+        </ul>
+
+        <p className="m-[0_0_20px] text-base p-0 text-black ">
+          <strong className="font-semibold block"><span>Type</span></strong>
+          {type}
         </p>
 
         <p className="m-[0_0_20px] text-base p-0 text-black ">
@@ -53,18 +89,9 @@ const KeyWord = ({id, status, language, budget, revenue, keyword}) => {
           {language}
         </p>
 
-        <p className="m-[0_0_20px] text-base p-0 text-black ">
-          <strong className="font-semibold block"><span>Budget</span></strong>
-          ${budget}
-        </p>
-
-        <p className="mb-0 m-[0_0_20px] text-base p-0 text-black ">
-          <strong className="font-semibold block"><span>Revenue</span></strong>
-          ${revenue}
-        </p>
-
+        
       </section>
-      <section className="border-b border-solid border-[#d7d7d7] text-black mb-7.5 w-full p-[0_20px] lg:p-0 mt-7.5 block ">
+      <section className="border-b border-solid border-[#d7d7d7] text-black mb-7.5 w-full p-[0_20px] lg:p-0  mt-7.5 block ">
         <h4 className="text-[17.6px] font-semibold mb-2.5 mt-0 p-0 m-0 leading-none "><span>Keywords</span></h4>
         <ul className="pb-7.5 w-full flex flex-wrap justify-start m-0 p-0 ">
           {keyword?.length > 0 ? (keyword?.map(item=>(
