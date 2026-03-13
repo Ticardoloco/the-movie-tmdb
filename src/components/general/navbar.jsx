@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const NavBar = () => {
+const NavBar = ({toggleBar, setToggleBar}) => {
   return (
     <div className='w-full items-center fixed top-0 left-0 bg-[#0d253f] h-16 max-w-[100vw] z-50 transition'>
       <div className="max-w-350 w-full flex justify-center items-center mx-auto">
@@ -26,7 +26,7 @@ const NavBar = () => {
                   <li className='text-black font-normal z-auto mr-3.75 flex flex-col flex-nowrap flex-none relative'><Link href="/more" className='px-4 py-2 gap-2 items-center relative text-white whitespace-nowrap font-semibold '>More</Link></li>
                 </ul>
             </div>
-            <div className="block lg:hidden text-white">
+            <div onClick={()=> setToggleBar(!toggleBar)} className="block lg:hidden text-white">
                 <Menu size={22.40}/>
             </div>
 
