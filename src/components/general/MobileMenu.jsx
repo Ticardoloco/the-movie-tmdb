@@ -3,7 +3,7 @@ import React from 'react'
 
 const MobileMenu = ({toggleBar, setToggleBar}) => {
   return (
-    <div className={`lg:hidden  inline-block fixed top-16 w-[80%]  h-full bg-[rgba(3,37,65,.9)] [backdrop-filter:blur(20px)] z-9999 [transition:ease_.3s] p-5 ${toggleBar ? "-left-[80%]":"left-0"}`}>
+    <div className={`lg:hidden  inline-block fixed top-16 w-[80%]  h-full bg-[rgba(3,37,65,.9)] [backdrop-filter:blur(20px)] z-9999 [transition:ease_.3s] p-5 ${toggleBar ? "left-0":"-left-[80%]"}`}>
       <ul className="m-0 p-0 ">
         <li onClick={()=> setToggleBar(!toggleBar)} className="pb-2.5 "><Link href="/movie" className='text-white font-semibold text-[20.8px] '>Movies</Link></li>
 
