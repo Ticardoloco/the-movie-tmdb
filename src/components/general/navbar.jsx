@@ -30,7 +30,7 @@ const NavBar = ({toggleBar, setToggleBar}) => {
                 <Menu size={22.40}/>
             </div>
 
-             <Link href="/">
+             <Link onClick={()=> setToggleBar(false)} href="/">
                     <Image
                       width={55}
                       height={39.64}
