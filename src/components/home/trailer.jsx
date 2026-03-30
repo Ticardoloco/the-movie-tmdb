@@ -96,7 +96,7 @@ const Trailer = () => {
     ]);
   return (
     <div className='bg-center bg-cover bg-no-repeat text-white transition-all duration-500 min-w-full max-w-350 w-full flex justify-center flex-wrap items-start content-start p-0 relative' style={activeBg ? { backgroundImage: `url(${TMDB_IMAGE_BASE}/w355_and_h200_multi_faces${activeBg})` }: {}}>
-      <div className="w-full bg-[linear-gradient(to_right,rgba(3,37,65,0.75)_0%,rgba(3,37,65,0.75)_100%)] flex items-start justify-center min-w-full after:opacity-100 after:transition-all after:duration-300 after:ease-linear after:content-[''] after:w-10 lg:after:w-15 after:h-full after:absolute after:top-0 after:right-0 after:bg-[linear-gradient(to_right,rgba(255,255,255,0),#fff)] lg:after:bg-[linear-gradient(to_right,rgba(255,255,255,0)_0,#fff_100%)] after:will-change-opacity after:pointer-events-none">
+      <div className="w-full bg-[linear-gradient(to_right,rgba(3,37,65,0.75)_0%,rgba(3,37,65,0.75)_100%)] flex items-start justify-center min-w-full after:opacity-100 after:transition-all after:duration-300 relative after:ease-linear after:content-[''] after:w-10 lg:after:w-15 after:h-full after:absolute after:top-0 after:right-0 after:bg-[linear-gradient(to_right,rgba(255,255,255,0),#fff)] lg:after:bg-[linear-gradient(to_right,rgba(255,255,255,0)_0,#fff_100%)] after:will-change-opacity after:pointer-events-none">
         <div className="relative top-0 left-0 flex justify-center w-full min-w-full flex-wrap items-start content-start ">
           <div className=" flex-wrap max-w-screen w-full py-7.5  flex items-start content-start mb-0! pb-0!">
             <div className="w-full">

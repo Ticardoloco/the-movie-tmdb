@@ -1,5 +1,6 @@
 "use client"
 import Hero from '@/components/home/hero'
+import Join from '@/components/home/join'
 import LeaderBoard from '@/components/home/leaderBoard'
 import Popular from '@/components/home/popular'
 import SearchBar from '@/components/home/searchBar'
@@ -19,6 +20,7 @@ const HomePage = () => {
         <Trailer/>
         <Popular/>
         <Watch/>
+        <Join/>
         <LeaderBoard/>
     </div>
   )

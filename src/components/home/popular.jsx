@@ -52,7 +52,7 @@ const Popular = () => {
   },[])
   return (
     <div className='min-w-full max-w-350 w-full flex justify-center flex-wrap items-start content-start bg-cover bg-no-repeat bg-position-[50%_50%] p-0 '>
-        <div className="w-full flex items-start justify-center min-w-full after:opacity-100 after:transition-all after:duration-300 after:ease-linear after:content-[''] after:w-10 lg:after:w-15 after:h-full after:absolute after:top-0 after:right-0 after:bg-[linear-gradient(to_right,rgba(255,255,255,0),#fff)] lg:after:bg-[linear-gradient(to_right,rgba(255,255,255,0)_0,#fff_100%)] after:will-change-opacity after:pointer-events-none">
+        <div className="w-full flex items-start relative justify-center min-w-full after:opacity-100 after:transition-all after:duration-300 after:ease-linear after:content-[''] after:w-10 lg:after:w-15 after:h-full after:absolute after:top-0 after:right-0 after:bg-[linear-gradient(to_right,rgba(255,255,255,0),#fff)] lg:after:bg-[linear-gradient(to_right,rgba(255,255,255,0)_0,#fff_100%)] after:will-change-opacity after:pointer-events-none">
           <div className="pr-0 pl-0 max-w-350 w-full py-7.5 flex items-start content-start flex-wrap pb-0! mb-0!">
             <div className="w-full">
               <Title text1={"What's Popular"} titleList={["Streaming", "On TV", "For Rent", "In Theaters"]}  slide={slidePopular} setSlide={setSlidePopular} dropDown={dropDown} setDropDown={setDropDown}/>

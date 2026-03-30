@@ -37,7 +37,9 @@ const Trending = () => {
         backgroundImage: `url('/trending-bg.svg')`,
       }}
     >
-      <div className="w-full flex items-start justify-center min-w-full after:opacity-100 after:transition-all after:duration-300 after:ease-linear after:content-[''] after:w-10 lg:after:w-15 after:h-full after:absolute after:top-0 after:right-0 after:bg-[linear-gradient(to_right,rgba(255,255,255,0),#fff)] lg:after:bg-[linear-gradient(to_right,rgba(255,255,255,0)_0,#fff_100%)] after:will-change-opacity after:pointer-events-none">
+      <div
+        className="relative z-0 w-full flex items-start justify-center min-w-full after:z-10 after:opacity-100 after:transition-all after:duration-300 after:ease-linear after:content-[''] after:w-10 lg:after:w-15 after:h-full after:absolute after:top-0 after:right-0 after:bg-[linear-gradient(to_right,rgba(255,255,255,0),#fff)] after:pointer-events-none"
+      >
         <div className="max-w-screen w-full py-7.5  flex items-start content-start flex-wrap mb-0! pb-0!">
           <div className="w-full">
             <Title
