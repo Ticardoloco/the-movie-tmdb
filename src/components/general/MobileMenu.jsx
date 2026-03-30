@@ -38,7 +38,7 @@ const MobileMenu = ({toggleBar, setToggleBar}) => {
         </li>
       </ul>
       <ul className="mt-5 m-0 p-0 ">
-        <li onClick={()=> setToggleBar(false)} className="pb-0 "><Link href="" className='text-[rgba(255,255,255,.6)] text-base font-semibold'>Logout</Link></li>
+        <li onClick={()=> setToggleBar(false)} className="pb-0 "><Link href="/login" className='text-[rgba(255,255,255,.6)] text-base font-semibold'>Login</Link></li>
       </ul>
     </div>
   )
