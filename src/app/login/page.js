@@ -1,10 +1,59 @@
 "use client"
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
+import { signInWithPopup, getRedirectResult } from 'firebase/auth';
+import { auth, googleProvider } from '../../../firebase/firebase';
+
+import { useRouter } from 'next/navigation';
+
 
 const LogIn = () => {
-    const [userName, setUserName] = useState("")
-    const [password, setPassword] = useState("")
+    const router = useRouter();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleEmailLogin = async (e)=>{
+      e.preventDefault();
+
+      if (!email || !password) {
+        toast.error("Input email and password");
+        return;
+      }
+
+      if (!email.includes("@")) {
+        toast.error("Please a valid email address");
+        return;
+      }
+
+      if (password.length < 6) {
+        toast.error("Password must be at least 6 characters");
+        return;
+      }
+      setTimeout(() => {router.push('/')});
+    }  
+
+    const handleGooglePopup = async () =>{
+      setIsLoading(true);
+
+      try {
+        const result = await signInWithPopup(auth, googleProvider);
+
+        const user = result.user;
+        toast.success(`Welcome ${user.displayName}!`);
+      } catch (error) {
+        console.error('Google popup failed');
+        const errorMessage = error.message;
+
+        if (error.code !== "auth/popup-closed-by-user") {
+          toast.error(errorMessage);
+        }
+      } finally{
+        setIsLoading(false);
+      }
+    }
+
   return (
     <div className='mt-15 w-full max-w-350 '>
       <div className="flex items-start justify-center min-w-full ">
@@ -15,19 +64,19 @@ const LogIn = () => {
 
                 <p className="text-base m-[0_0_16px] p-0">If you signed up but didn&apos;t get your verification email, <Link href="/signup" className='text-[rgba(1,180,228)] underline decoration-[color-mix(in_srgb,currentColor_40%,transparent)] underline-offset-3px'>click here</Link> to have it resent.</p>
 
-                <form action="/login" className='p-0 text-[#212529] border-0 text-base leading-normal mt-8 '>
+                <form onSubmit={handleEmailLogin} action="/login" className='p-0 text-[#212529] border-0 text-base leading-normal mt-8 '>
                     <fieldset className='mt-0 p-0 m-0 border-0 '>
                         <input
                          type="hidden"
                          className='leading-normal text font-inherit m-0 p-0'
                          />
                          <label htmlFor="username" className="block mb-4 ">
-                          <span>Username</span>
+                          <span>Email</span>
                           <span className="border-[rgba(33,37,41,0.2)] focus:border-[rgb(1,180,228)] text-[#212529]  bg-white text-base leading-normal m-0 p-0 w-full min-w-0 border border-solid font-normal text-start shadow-none items-stretch relative overflow-hidden truncate outline-0 inline-flex flex-row flex-nowrap align-middle rounded-md ">
                             <input
-                             type="text" 
-                             value={userName}
-                             onChange={(e)=>setUserName(e.target.value)}
+                             type="email" 
+                             value={email}
+                             onChange={(e)=>setEmail(e.target.value)}
                              className="w-full mt-0 py-1.5 px-3 border-0! outline-0 shadow-none border-[rgba(33,37,41,0.2)] flex-1 relative z-1 truncate m-0 p-0 inline-flex flex-row flex-nowrap align-middle rounded-md " />
                           </span>
                          </label>
@@ -52,7 +101,7 @@ const LogIn = () => {
                     </div>
 
                     <div className="w-full lg:w-auto">
-                      <input type="submit" value='Login with google' className="w-full lg:w-auto cursor-pointer border-[#dee2e6] text-[#212529] bg-[#dee2e6] py-1.5 px-3 text-base leading-normal border border-solid font-normal text-center whitespace-nowrap inline-flex items-center justify-center gap-2 align-middle select-none outline-0 relative rounded-md " />
+                      <input onClick={handleGooglePopup} type="submit" value='Login with google' className="w-full lg:w-auto cursor-pointer border-[#dee2e6] text-[#212529] bg-[#dee2e6] py-1.5 px-3 text-base leading-normal border border-solid font-normal text-center whitespace-nowrap inline-flex items-center justify-center gap-2 align-middle select-none outline-0 relative rounded-md " />
                     </div>
                     </div>
                 </form>
